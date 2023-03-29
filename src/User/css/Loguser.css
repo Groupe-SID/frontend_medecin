@@ -160,15 +160,6 @@
 
 }
 
-#texte_eni_login{
-    background: -webkit-linear-gradient(#01680b,#1e828f,#071b40 );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: "LGC Bold";
-    font-weight: 500;
-    /* letter-spacing: 2px; */
-    /* font-size: 15px; */
-}
 
 #link{
     text-decoration: none;
