@@ -84,12 +84,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     margin-bottom: 25px;
+    width: 70%;
     /* border:1px solid blue; */
+    /* overflow: hidden; */
 }
 
 .input_login input{
-    width:67%;
+    width:95%;
     height:45px;
     background-color:white;
     outline: none;
@@ -113,19 +116,18 @@
     margin-top: 15px;
     
 } */
-.bouton_login{
+.bouton_login1{
     margin-bottom: 20px;
     /* border:1px solid orange; */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    width:100%;
-    margin-left: 25%;
-    cursor: pointer;
+    align-items: flex-end;
+    width:70%;
+
 }
 
-.login_btn{
-    width:71%;
+.login_btn1{
+    width:25%;
     background-color: #0C7A07;
     height:45px;
     display: flex;
@@ -133,9 +135,27 @@
     align-items: center;
     justify-content: center;
     color:white;
-    font-weight: bold;
+    font-size: 14px;
+    /* font-weight: bold; */
     box-shadow: 0 0 2px black;
     border-radius: 2px;
+    cursor: pointer;
+}
+
+.login_btn2{
+    width:100%;
+    background-color: #0C7A07;
+    height:45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-size: 14px;
+    /* font-weight: bold; */
+    box-shadow: 0 0 2px black;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 .signup_login{
@@ -172,4 +192,22 @@
 
 #link{
     text-decoration: none;
+}
+
+.success_notif{
+    /* border:1px solid black; */
+    width:70%;
+    height:150px;
+    box-shadow: 0 0 2px rgb(0,127,0);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.iconcheck{
+    margin-bottom: 15px;
 }
