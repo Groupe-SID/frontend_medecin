@@ -1,0 +1,71 @@
+.content_accueil{
+    height:100%;
+    /* border:3px solid yellow; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu_verticale{
+    width:20%;
+    background-color: rgb(30,30,30);
+    height:100%;
+}
+
+.haut_verticale{
+    height:15%;
+    /* border:1px solid orange; */
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "century gothic";
+    color: rgb(214, 212, 212);
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 20%;
+
+}
+
+
+.middle_menu{
+    height:50px;
+    /* border:1px solid blue; */
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "century gothic";
+    color: rgb(214, 212, 212);
+    /* letter-spacing: 1px; */
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#link{
+    text-decoration: none;
+}
+
+.icon_menu{
+    width:25%;
+    /* border:1px solid green; */
+}
+
+#active_menu{
+    /* background-color: #359C27; */
+    background-color:  #7B9971;
+    color: black;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.logo_mc{
+    width:35px;
+}
+
+/* BODY */
+.body_accueil{
+    width:80%;
+}

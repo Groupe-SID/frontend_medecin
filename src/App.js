@@ -4,7 +4,10 @@ import Loguser from './User/pages/Loguser';
 import Registeruser from './User/pages/Registeruser';
 import Protected from './User/components/Protected';
 import Accueil from './User/pages/Accueil';
-
+import Patients from './User/pages/Patients';
+import Logadmin from './Admin/pages/Logadmin';
+import Doctors from './User/pages/Doctors';
+import Visits from './User/pages/Visits';
 
 function App() {
   const isSignedIn = localStorage.getItem("isSignedIn");
@@ -16,11 +19,36 @@ function App() {
           {/* <Route index element={<Login/>} /> */}
           <Route path="/" element={<Loguser />} />
           <Route path="register" element={<Registeruser />} />
+          <Route path="admin" element={<Logadmin />} />
           <Route 
             path="accueil" 
             element={
               <Protected isSignedIn={isSignedIn}>
                 <Accueil />
+              </Protected>
+            } 
+          />
+          <Route 
+            path="patients" 
+            element={
+              <Protected isSignedIn={isSignedIn}>
+                <Patients />
+              </Protected>
+            } 
+          />
+          <Route 
+            path="doctors" 
+            element={
+              <Protected isSignedIn={isSignedIn}>
+                <Doctors />
+              </Protected>
+            } 
+          />
+          <Route 
+            path="visits" 
+            element={
+              <Protected isSignedIn={isSignedIn}>
+                <Visits />
               </Protected>
             } 
           />

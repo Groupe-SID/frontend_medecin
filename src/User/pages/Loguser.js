@@ -16,6 +16,7 @@ const Loguser = () => {
     const [loading, setLoading] = useState(false);
     const [validatedusername,setValidatedusername] = useState(true)
     const [validatedPassword, setValidatedPassword] = useState(true);
+    const [showPass,setShowPass] = useState(false)
 
     const navigate = useNavigate();
 
@@ -47,18 +48,23 @@ const Loguser = () => {
                 password: password,
             }).then(function (response) {
                 if(response.status === 200){
-                    setLoading(false);
+                    localStorage.setItem('isSignedIn', true);
                     console.log(response.data)
                     localStorage.clear()
                     localStorage.setItem('accessToken', response.data.accessToken);
                     localStorage.setItem('isSignedIn', true);
+                    // console.log(localStorage.getItem('isSignedIn'))
+                    localStorage.setItem('isSignedIn', true);
+                    console.log("Here")
                     navigate('/accueil');
+                    console.log("Here againa")
+                    setLoading(false);
                 }
             })
             .catch((error) => { // error is handled in catch block
                 console.log(error)
             })  
-    }, 500);
+    }, 200);
     }
 
     return (
@@ -99,7 +105,7 @@ const Loguser = () => {
                       }}>Password</label>
                       
                       <input 
-                          type="password" 
+                          type= {showPass ? "text" : "password"}    
                           placeholder="Enter your password"
                           id="password"
                           name="password"
@@ -109,6 +115,21 @@ const Loguser = () => {
                             border:!validatedPassword && '1px solid #D32F2F'
                           }}
                           required />
+                    </div>
+                    <div className='check'>
+                        <input 
+                            type = "checkbox"
+                            checked = {showPass}
+                            onChange={(e)=>{
+                                if(showPass){
+                                    setShowPass(false)
+                                }
+                                if(!showPass){
+                                    setShowPass(true)
+                                }
+                            }}
+                        />
+                        <label>Show password</label>
                     </div>
 
                 </form>

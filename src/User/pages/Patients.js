@@ -1,17 +1,14 @@
 import React from 'react'
-import Header from '../components/Header'
-import "../css/accueil.css"
+import "../css/patients.css"
 import {ImStatsBars} from "react-icons/im"
 import {FaUserMd} from "react-icons/fa"
 import {HiUserGroup} from "react-icons/hi"
 import {BsCalendarPlus} from "react-icons/bs"
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo_mc from "../images/Logo_mc.png"
+import Header from '../components/Header';
 
-
-
-
-const Accueil = () => {
+const Patients = () => {
   return (
     <div className='content_accueil'>
       <div className='menu_verticale'>
@@ -20,9 +17,9 @@ const Accueil = () => {
           MEDICAL CARE
         </div>
         <Link  id="link"  to="/accueil">
-          <div className='middle_menu' id='active_menu'>
+          <div className='middle_menu'>
                 <div className='icon_menu'>
-                  <ImStatsBars size={20} color="black"/>
+                  <ImStatsBars size={20} color="rgb(214, 212, 212)"/>
                 </div>
                 Dashboard
           </div>
@@ -38,9 +35,9 @@ const Accueil = () => {
         </Link>
 
         <Link  id="link"  to="/patients">
-          <div className='middle_menu'>
+          <div className='middle_menu' id='active_menu'>
             <div className='icon_menu'>
-              <HiUserGroup size={20} color="rgb(214, 212, 212)"/>
+              <HiUserGroup size={20} color="black"/>
             </div>
             Patients
           </div>
@@ -58,9 +55,10 @@ const Accueil = () => {
 
       </div>
       <div className='body_accueil'>
-          <Header />
+        <Header />
       </div>
     </div>
   )
 }
-export default Accueil
+
+export default Patients
