@@ -87,7 +87,9 @@ const Doctors = () => {
         }
       }).then(function (response) {
         if(response.status === 201){
-            setShowAddForm(false)
+          setShowAddForm(false)
+          setShowList(true)
+          setShowEdit(false)
             loadData()
             console.log(response.data)
             // setListDoc(response.data)
