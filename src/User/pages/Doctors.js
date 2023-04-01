@@ -13,7 +13,7 @@ import {MdOutlineModeEdit} from "react-icons/md"
 import axios from 'axios'
 
 const initialDoctor ={
-  numMedecin: "",
+  num_medecin: "",
   nom: "",
   prenoms: "",
   tarif:0,
@@ -25,7 +25,7 @@ const Doctors = () => {
   const [listDoc,setListDoc] = useState([])
   const [accesToken,setAccessToken] = useState(localStorage.getItem('accessToken'))
   const [stateDoctor,setStateDoctor] = useState(initialDoctor)
-  const {numMedecin,nom,prenoms,tarif} = stateDoctor
+  const {num_medecin,nom,prenoms,tarif} = stateDoctor
   const [rn,setRn] = useState(Math.floor(1000 + Math.random() * 9000))
   const [showAddForm,setShowAddForm] = useState(false)
   const [showEdit,setShowEdit] = useState(false)
@@ -76,7 +76,7 @@ const Doctors = () => {
     try
     {
       axios.post("http://localhost:3001/api/medecins",{
-        numMedecin : rn,
+        num_medecin : rn,
         nom:nom,
         prenoms:prenoms,
         imageUrl:"imageUrl",
@@ -126,13 +126,13 @@ const Doctors = () => {
     }
   }
 
-  const showEditForm = (id,numMedecin,nom,prenoms,tarif) =>{
+  const showEditForm = (id,num_medecin,nom,prenoms,tarif) =>{
     console.log(tarif)
     setStateDoctor({
       nom:nom,
       prenoms:prenoms,
       tarif:parseInt(tarif),
-      numMedecin:numMedecin
+      num_medecin:num_medecin
     })
     setIdModif(id)
     setShowEdit(true)
@@ -144,7 +144,7 @@ const Doctors = () => {
     try
     {
       axios.put("http://localhost:3001/api/medecins/"+idModif,{
-        numMedecin:numMedecin,
+        num_medecin:num_medecin,
         nom:nom,
         prenoms:prenoms,
         tarif:tarif,
@@ -266,7 +266,7 @@ const Doctors = () => {
                         {doc.id}
                       </div>
                       <div className='item_doctors'>
-                        {doc.numMedecin}
+                        {doc.num_medecin}
                       </div>
                       <div className='item_doctors'>
                         {doc.nom}
@@ -280,7 +280,7 @@ const Doctors = () => {
                       <div className='item_doctors'>
                         <MdOutlineModeEdit 
                           className='actions_icon' 
-                          onClick={()=>showEditForm(doc.id,doc.numMedecin,doc.nom,doc.prenoms,doc.tj)}
+                          onClick={()=>showEditForm(doc.id,doc.num_medecin,doc.nom,doc.prenoms,doc.tj)}
                           size={20} 
                           color="rgb(30, 30, 30)"/>
                         <IoTrashSharp 
@@ -309,8 +309,8 @@ const Doctors = () => {
                           {/* <input 
                             type="text" 
                             // placeholder="First Name"
-                            id="numMedecin"
-                            name="numMedecin"
+                            id="num_medecin"
+                            name="num_medecin"
                             value={rn}
                             onChange={handleInputChange}
                             required 
@@ -379,13 +379,13 @@ const Doctors = () => {
                   </div>
                   <form className='form_doctors'>
                       <div className='input_doctors'>
-                          <label>N° registration :  <b> {numMedecin}</b></label>
+                          <label>N° registration :  <b> {num_medecin}</b></label>
 
                           {/* <input 
                             type="text" 
                             // placeholder="First Name"
-                            id="numMedecin"
-                            name="numMedecin"
+                            id="num_medecin"
+                            name="num_medecin"
                             value={rn}
                             onChange={handleInputChange}
                             required 
