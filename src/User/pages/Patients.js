@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import "../css/patients.css"
 import {ImStatsBars} from "react-icons/im"
 import {FaUserMd} from "react-icons/fa"
@@ -10,6 +10,8 @@ import Header from '../components/Header';
 import axios from 'axios'
 import {IoAddOutline,IoTrashSharp} from "react-icons/io5"
 import {MdOutlineModeEdit} from "react-icons/md"
+import {TiEye} from "react-icons/ti"
+
 
 const initialPatient ={
   nom: "",
@@ -18,8 +20,17 @@ const initialPatient ={
   adresse: ""
 }
 
+const initialVisit= {
+  patient_id: "",
+  medecin_id: "",
+  dateCons: "",
+  nbjour: 1
+}
+
 const Patients = () => {
   const [listPatient,setListPatient] = useState([])
+  const [listMed,setListMed] = useState([])
+
   const [accesToken,setAccessToken] = useState(localStorage.getItem('accessToken'))
   const [statePatient,setStatePatient] = useState(initialPatient)
   const {nom,prenoms,genre,adresse} = statePatient
@@ -29,21 +40,43 @@ const Patients = () => {
   const [showList,setShowList] =useState(true)
   const [idModif,setIdModif] = useState()
 
+
+  const [showVisitForm,setSVF] = useState(false)
+  const [idDoc,setIdDoc] = useState()
+
+  const [date, setDate] = useState('');
+  const dateInputRef = useRef(null);
+
+  const [stateVisit,setStateVisit] = useState(initialVisit)
+  const {patient_id,medecin_id,dateCons,nbjour} = stateVisit
+
+  const handleChange = (e) => {
+    setDate(e.target.value);
+    };
+
   const loadData = async()=>{
     const response = await axios.get("http://localhost:3001/api/patients",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListPatient(response.data);
+    const response1 = await axios.get("http://localhost:3001/api/medecins",{headers:{
+      'Authorization':'Bearer '+ accesToken
+    }});
+    setListMed(response1.data);
   }
-
   
   const handleInputChange = (e) => {
     const {name,value} = e.target;
     setStatePatient({...statePatient, [name]:value});
   }
 
+  const handleSelect = (e) =>{
+    setIdDoc(e.target.value)
+  }
+
   useEffect(() => {
     getAllPatients();
+    getAllDoctors();
     loadData();
  }, []);
 
@@ -69,6 +102,37 @@ const Patients = () => {
     }
   }
 
+  const getAllDoctors = () => {
+    console.log(accesToken)
+    try
+    {
+      axios.get("http://localhost:3001/api/medecins",{
+        headers :{
+          'Authorization':'Bearer '+ accesToken
+        }
+      }).then(function (response) {
+        if(response.status === 200){
+            console.log(response.data)
+            setListMed(response.data)
+        }
+      }).catch((error) => { // error is handled in catch block
+        console.log(error)
+      })  
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
+
+
+  const getAllMed = () =>{
+    return listMed.map((med) => {
+      return <option value={med.id}>{med.nom} 
+             </option>;
+    });
+  }
+
+
   const savePatient = () =>{
     try
     {
@@ -86,6 +150,7 @@ const Patients = () => {
             setShowAddForm(false)
             setShowList(true)
             setShowEdit(false)
+            setSVF(false)
             loadData()
             console.log(response.data)
             // setListPatient(response.data)
@@ -134,6 +199,20 @@ const Patients = () => {
     setShowEdit(true)
     setShowAddForm(false)
     setShowList(false)
+    setSVF(false)
+  }
+
+  const showVF = (id,nom,prenoms) =>{
+    // console.log(tarif)
+    setStatePatient({
+      nom:nom,
+      prenoms:prenoms
+    })
+    setIdModif(id)
+    setShowEdit(false)
+    setShowAddForm(false)
+    setShowList(false)
+    setSVF(true)
   }
 
   const editPatient = () =>{
@@ -157,12 +236,49 @@ const Patients = () => {
             setIdModif(null)
             setShowEdit(false)
             setShowAddForm(false)
+            setSVF(false)
             setShowList(true)
             loadData()
             console.log(response.data)
             // setListPatient(response.data)
         }
       }).catch((error) => {
+        console.log(error)
+      })  
+    }
+    catch(e){
+      console.log(e)
+    }
+
+  }
+
+  const saveVisit = () =>{
+    try
+    {
+      axios.post("http://localhost:3001/api/traitements",{
+        patient_id:idModif,
+        medecin_id:idDoc,
+        dateCons:date,
+        nbjour:1
+      },{
+        headers :{
+          'Authorization':'Bearer '+ accesToken
+        }
+      }).then(function (response) {
+        if(response.status === 201){
+            setShowAddForm(false)
+            setShowList(true)
+            setShowEdit(false)
+            setSVF(false)
+            setIdDoc(null)
+            setIdModif(null)
+            setDate(null)
+            loadData()
+            
+            console.log(response.data)
+            // setListPatient(response.data)
+        }
+      }).catch((error) => { // error is handled in catch block
         console.log(error)
       })  
     }
@@ -229,6 +345,7 @@ const Patients = () => {
                   setShowAddForm(true)
                   setShowEdit(false)
                   setShowList(false)
+                  setSVF(false)
                  
                   }}>
                     <IoAddOutline size={28} id="icon_add" color='white' fill='white'/>
@@ -275,10 +392,12 @@ const Patients = () => {
                       <div className='item_patients'>
                         {doc.adresse}
                       </div>
-                      {/* <div className='item_patients'>
-                        {doc.createdAt.slice(0, 10)}
-                      </div> */}
                       <div className='item_patients'>
+                      <TiEye
+                          className='actions_icon' 
+                          onClick={()=>showVF(doc.id,doc.nom,doc.prenoms)}
+                          size={22} 
+                          color="rgb(30, 30, 30)"/>
                         <MdOutlineModeEdit 
                           className='actions_icon' 
                           onClick={()=>showEditForm(doc.id,doc.nom,doc.prenoms,doc.genre,doc.adresse)}
@@ -289,6 +408,7 @@ const Patients = () => {
                           size={20} 
                           onClick={()=>deletePatient(doc.id)}
                           color="rgb(30, 30, 30)"/>
+                        
                       </div>
                     </div>
                   ))
@@ -340,18 +460,6 @@ const Patients = () => {
                             required 
                           />
                       </div>
-                      {/* <div className='input_patients'>
-                        <label>Genre</label>
-                        <input 
-                          type="text" 
-                          placeholder="Daily rate"
-                          id="tarif"
-                          name="tarif"
-                          value={genre}
-                          onChange={handleInputChange}
-                          required 
-                        />
-                      </div>   */}
                       <div className='btn_save_cancel'>
                         <div className='btn_save_patients' onClick={savePatient}>
                           Add
@@ -360,6 +468,7 @@ const Patients = () => {
                           setShowAddForm(false)
                           setShowEdit(false)
                           setShowList(true)
+                          setSVF(false)
                           }}>
                           Cancel
                         </div>
@@ -423,6 +532,73 @@ const Patients = () => {
                           setShowList(true)
                           setShowAddForm(false)
                           setShowEdit(false)
+                          setSVF(false)
+                         
+                          }}>
+                          Cancel
+                        </div>
+                      </div>     
+                  </form>
+                </div>  
+              )
+            }
+
+            
+            {
+              showVisitForm && (
+                <div className='form_add_patients'>
+                  <div className='texte_add_patient'>
+                    See a doctor
+                  </div>
+                  <form className='form_patients'>
+                      <div className='input_patients'>
+                          <label>N° Patient :  <b> {idModif}</b></label>
+                          <input 
+                          type="text" 
+                          placeholder="First Name"
+                          id="nom"
+                          name="nom"
+                          value={nom +prenoms}
+                          disabled
+                        />
+                      </div>
+
+                     <div className='input_patients'>
+                        <label>Choose a doctor</label>
+                        <select
+                          className="form-control"
+                          onChange={handleSelect}
+                          >
+                          <option value="choose" disabled selected="selected">
+                            --- Select a doctor ---
+                          </option>
+                          {getAllMed()}
+                        </select>
+                      </div>
+                      <div className='input_patients'>
+                        <label>Pick a date</label>
+                        <input
+                          type="date"
+                          onChange={handleChange}
+                          ref={dateInputRef}
+                        />
+                      </div>
+                      <div className='btn_save_cancel'>
+                        <div className='btn_save_patients' onClick={()=>
+                          {
+                            if(idModif != null && idDoc != null && date != null){
+                            saveVisit()
+                            }
+                          }
+                        
+                        }>
+                          Save
+                        </div>
+                        <div className='btn_cancel_patients' onClick={()=>{
+                          setShowList(true)
+                          setShowAddForm(false)
+                          setShowEdit(false)
+                          setSVF(false)
                          
                           }}>
                           Cancel
