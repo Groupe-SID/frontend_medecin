@@ -76,6 +76,27 @@ const Visits = () => {
     }
   }
 
+  const deleteVisits = (id) =>{
+    if (window.confirm("Are you sure you want to delete this consultation?")) {
+      try
+      {
+        axios.delete("http://localhost:3001/api/traitements/"+id,{
+          headers :{
+            'Authorization':'Bearer '+ accesToken
+          }
+        }).then(function (response) {
+          if(response.status === 200){
+              loadData()
+          }
+        }).catch((error) => { // error is handled in catch block
+          console.log(error)
+        })  
+      }
+      catch(e){
+        console.log(e)
+      }
+    }
+  }
 
 
   return (
@@ -184,7 +205,7 @@ const Visits = () => {
                         <IoTrashSharp 
                           className='actions_icon' 
                           size={20} 
-                          // onClick={()=>deleteDoctor(doc.id)}
+                           onClick={()=>deleteVisits(doc.id)}
                           color="rgb(30, 30, 30)"/>
                       </div>
                     </div>

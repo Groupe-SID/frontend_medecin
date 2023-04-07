@@ -4,7 +4,7 @@ import {ImStatsBars} from "react-icons/im"
 import {FaUserMd} from "react-icons/fa"
 import {HiUserGroup} from "react-icons/hi"
 import {BsCalendarPlus} from "react-icons/bs"
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import logo_mc from "../images/Logo_mc.png"
 import Header from '../components/Header';
 import axios from 'axios'
@@ -23,7 +23,7 @@ const initialPatient ={
 const initialVisit= {
   patient_id: "",
   medecin_id: "",
-  dateCons: "",
+  datecons: "",
   nbjour: 1
 }
 
@@ -40,6 +40,8 @@ const Patients = () => {
   const [showList,setShowList] =useState(true)
   const [idModif,setIdModif] = useState()
 
+  const navigate = useNavigate();
+
 
   const [showVisitForm,setSVF] = useState(false)
   const [idDoc,setIdDoc] = useState()
@@ -48,7 +50,7 @@ const Patients = () => {
   const dateInputRef = useRef(null);
 
   const [stateVisit,setStateVisit] = useState(initialVisit)
-  const {patient_id,medecin_id,dateCons,nbjour} = stateVisit
+  const {patient_id,medecin_id,datecons,nbjour} = stateVisit
 
   const handleChange = (e) => {
     setDate(e.target.value);
@@ -258,7 +260,7 @@ const Patients = () => {
       axios.post("http://localhost:3001/api/traitements",{
         patient_id:idModif,
         medecin_id:idDoc,
-        dateCons:date,
+        datecons:date,
         nbjour:1
       },{
         headers :{
@@ -273,7 +275,8 @@ const Patients = () => {
             setIdDoc(null)
             setIdModif(null)
             setDate(null)
-            loadData()
+            // loadData()
+            navigate('/visits')
             
             console.log(response.data)
             // setListPatient(response.data)
