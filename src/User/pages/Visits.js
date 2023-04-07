@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useRef } from 'react'
 import "../css/visits.css"
 import {ImStatsBars} from "react-icons/im"
 import {FaUserMd} from "react-icons/fa"
@@ -11,10 +11,32 @@ import {IoAddOutline,IoTrashSharp} from "react-icons/io5"
 import {MdOutlineModeEdit} from "react-icons/md"
 import axios from 'axios'
 
+
+const initialVisit = {
+  id:null,
+  medecin_id:"",
+  patient_id:"",
+  datecons:"",
+  nbjour:"1"
+}
+
 const Visits = () => {
   const [accesToken,setAccessToken] = useState(localStorage.getItem('accessToken'))
   const [showList,setShowList] = useState(true)
   const [listVisit,setListVisit] = useState([])
+  const [editVF,setEditVF] = useState(false)
+  const [stateV,setStateV] = useState(initialVisit)
+  const {id,medecin_id,patient_id,datecons,nbjour} = stateV
+  const [listMed,setListMed] = useState([])
+  const [nomP,setNomP] =useState()
+  const [id_doc,setIdDoc] =useState()
+
+  const [date, setDate] = useState();
+  const dateInputRef = useRef(null);
+
+  const handleChange = (e) => {
+    setDate(e.target.value);
+    };
 
   const loadData = async()=>{
     const response = await axios.get("http://localhost:3001/api/traitements",{headers:{
@@ -31,6 +53,7 @@ const Visits = () => {
 
   useEffect(() => {
     getAllVisits();
+    getAllDoctors();
     loadData();
  }, []);
 
@@ -56,16 +79,60 @@ const Visits = () => {
     }
   }
 
-  const getMedecinById = (id) =>{
+  // const getMedecinById = (id) =>{
+  //   try
+  //   {
+  //     axios.get("http://localhost:3001/api/medecins/"+id,{
+  //       headers :{
+  //         'Authorization':'Bearer '+ accesToken
+  //       }
+  //     }).then(function (response) {
+  //       if(response.status === 200){
+  //          return response.data.nom
+  //       }
+  //     }).catch((error) => { // error is handled in catch block
+  //       console.log(error)
+  //     })  
+  //   }
+  //   catch(e){
+  //     console.log(e)
+  //   }
+  // }
+
+  // const getPatientById = (id) =>{
+  //   try
+  //   {
+  //     axios.get("http://localhost:3001/api/patients/"+id,{
+  //       headers :{
+  //         'Authorization':'Bearer '+ accesToken
+  //       }
+  //     }).then(function (response) {
+  //       if(response.status === 200){
+  //          setNomP(response.data.nom)
+  //       }
+  //     }).catch((error) => { // error is handled in catch block
+  //       console.log(error)
+  //     })  
+  //   }
+  //   catch(e){
+  //     console.log(e)
+  //   }
+  // }
+
+  
+
+  const getAllDoctors = () => {
+    console.log(accesToken)
     try
     {
-      axios.get("http://localhost:3001/api/medecins/"+id,{
+      axios.get("http://localhost:3001/api/medecins",{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
       }).then(function (response) {
         if(response.status === 200){
-           return response.data.nom
+            console.log(response.data)
+            setListMed(response.data)
         }
       }).catch((error) => { // error is handled in catch block
         console.log(error)
@@ -74,6 +141,14 @@ const Visits = () => {
     catch(e){
       console.log(e)
     }
+  }
+
+
+  const getAllMed = () =>{
+    return listMed.map((med) => {
+      return <option value={med.id} selected={med.id == medecin_id ? true:false}>{med.nom} 
+             </option>;
+    });
   }
 
   const deleteVisits = (id) =>{
@@ -96,6 +171,75 @@ const Visits = () => {
         console.log(e)
       }
     }
+  }
+
+  const handleSelect = (e) =>{
+    setIdDoc(e.target.value)
+  }
+
+  const showEditVF = (id,medecin_id,patient_id,datecons) =>{
+    setStateV({
+      id:id,
+      medecin_id:medecin_id,
+      patient_id:patient_id,
+      datecons:datecons
+    })
+
+    setDate(datecons.slice(0, 10))
+
+    try
+    {
+      axios.get("http://localhost:3001/api/patients/"+patient_id,{
+        headers :{
+          'Authorization':'Bearer '+ accesToken
+        }
+      }).then(function (response) {
+        if(response.status === 200){
+          setNomP(response.data.nom + " " + response.data.prenoms)
+          setEditVF(true)
+          setShowList(false)
+
+        }
+      }).catch((error) => { // error is handled in catch block
+        console.log(error)
+      })  
+    }
+    catch(e){
+      console.log(e)
+    }
+
+  } 
+
+  const saveVisit = (id) =>{
+    try
+    {
+      axios.put("http://localhost:3001/api/traitements/"+id,{
+        patient_id:patient_id,
+        medecin_id:id_doc,
+        datecons:date,
+        nbjour:nbjour
+      },{
+        headers :{
+          'Authorization':'Bearer '+ accesToken
+        }
+      }).then(function (response) {
+        if(response.status === 200){
+            setShowList(true)
+            setEditVF(false)
+            setStateV(initialVisit)
+            setDate(null)
+            loadData()
+            console.log(response.data)
+            // setListPatient(response.data)
+        }
+      }).catch((error) => { // error is handled in catch block
+        console.log(error)
+      })  
+    }
+    catch(e){
+      console.log(e)
+    }
+
   }
 
 
@@ -199,7 +343,7 @@ const Visits = () => {
                       <div className='item_visits'>
                         <MdOutlineModeEdit 
                           className='actions_icon' 
-                          // onClick={()=>showEditForm(doc.id,doc.num_medecin,doc.nom,doc.prenoms,doc.tj)}
+                          onClick={()=>showEditVF(doc.id,doc.medecin_id,doc.patient_id,doc.datecons)}
                           size={20} 
                           color="rgb(30, 30, 30)"/>
                         <IoTrashSharp 
@@ -215,134 +359,66 @@ const Visits = () => {
               )
             }
 
-            {/* {
-              showAddForm && (
-                <div className='form_add_visits'>
-                  <div className='texte_add_doctor'>
-                    Add doctor
-                  </div>
-                  <form className='form_visits'>
-                      <div className='input_visits'>
-                          <label>N° registration :  <b> {rn}</b></label>
-                      </div>
-                      <div className='input_visits'>
-                        <label>First Name</label>
-                        <input 
-                          type="text" 
-                          placeholder="First Name"
-                          id="nom"
-                          name="nom"
-                          value={nom}
-                          onChange={handleInputChange}
-                          required 
-                        />
-                      </div>
-                      <div className='input_visits'>
-                        <label>Last Name</label>
-                        <input 
-                          type="text" 
-                          placeholder="Last Name"
-                          id="prenoms"
-                          name="prenoms"
-                          value={prenoms}
-                          onChange={handleInputChange}
-                          required 
-                        />
-                      </div>  
-                      <div className='input_visits'>
-                        <label>tarif</label>
-                        <input 
-                          type="number" 
-                          placeholder="Daily rate"
-                          id="tarif"
-                          name="tarif"
-                          value={parseInt(tarif)}
-                          onChange={handleInputChange}
-                          required 
-                        />
-              
-                      </div>  
-                      <div className='btn_save_cancel'>
-                        <div className='btn_save_visits' onClick={saveDoctor}>
-                          Add
-                        </div>
-                        <div className='btn_cancel_visits' onClick={()=>{
-                          setShowAddForm(false)
-                          setShowEdit(false)
-                          setShowList(true)
-                          }}>
-                          Cancel
-                        </div>
-                      </div>     
-                  </form>
-                </div>  
-              )
-            }
-
             {
-              showEdit && (
+              editVF && (
                 <div className='form_add_visits'>
-                  <div className='texte_add_doctor'>
-                    Edit doctor
-                  </div>
-                  <form className='form_visits'>
-                      <div className='input_visits'>
-                          <label>N° registration :  <b> {num_medecin}</b></label>
+                <div className='texte_add_visit'>
+                  Edit consultation
+                </div>
+                <form className='form_visits'>
+                    <div className='input_visits'>
+                        <label>N° Patient :  <b> {patient_id}</b></label>
+                        <input 
+                        type="text" 
+                        placeholder="First Name"
+                        id="nom"
+                        name="nom"
+                        value={nomP}
+                        disabled
+                      />
+                    </div>
+
+                   <div className='input_visits'>
+                      <label>N° Doctor : <b>{medecin_id}</b></label>
+                      <select
+                        className="form-control"
+                        onChange={handleSelect}
+                        >
+                        {getAllMed()}
+                      </select>
+                    </div>
+                    <div className='input_visits'>
+                      <label>Pick a date</label>
+                      <input
+                        type="date"
+                        value={date}
+                        onChange={handleChange}
+                        ref={dateInputRef}
+                      />
+                    </div>
+                    <div className='btn_save_cancel'>
+                      <div className='btn_save_visits' onClick={()=>
+                        {
+                          if(id != null && medecin_id != null && patient_id != null){
+                            saveVisit(id)
+                          }
+                        }
+                      
+                      }>
+                        Save
                       </div>
-                      <div className='input_visits'>
-                        <label>First Name</label>
-                        <input 
-                          type="text" 
-                          placeholder="First Name"
-                          id="nom"
-                          name="nom"
-                          value={nom}
-                          onChange={handleInputChange}
-                          required 
-                        />
+                      <div className='btn_cancel_visits' onClick={()=>{
+                        setShowList(true)
+                        setEditVF(false)
+                        setStateV(initialVisit)                       
+                        }}>
+                        Cancel
                       </div>
-                      <div className='input_visits'>
-                        <label>Last Name</label>
-                        <input 
-                          type="text" 
-                          placeholder="Last Name"
-                          id="prenoms"
-                          name="prenoms"
-                          value={prenoms}
-                          onChange={handleInputChange}
-                          required 
-                        />
-                      </div>  
-                      <div className='input_visits'>
-                        <label>tarif</label>
-                        <input 
-                          type="number" 
-                          placeholder="Daily rate"
-                          id="tarif"
-                          name="tarif"
-                          value={tarif}
-                          onChange={handleInputChange}
-                          required 
-                        />
-              
-                      </div>  
-                      <div className='btn_save_cancel'>
-                        <div className='btn_save_visits' onClick={editDoctor}>
-                          Save
-                        </div>
-                        <div className='btn_cancel_visits' onClick={()=>{
-                          setShowList(true)
-                          setShowAddForm(false)
-                          setShowEdit(false)
-                         
-                          }}>
-                          Cancel
-                        </div>
-                      </div>     
-                  </form>
-                </div>  
+                    </div>     
+                </form>
+              </div> 
               )
-            } */}
+            } 
 
             
         </div>
