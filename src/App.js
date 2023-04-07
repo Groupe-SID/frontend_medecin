@@ -3,14 +3,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loguser from './User/pages/Loguser';
 import Registeruser from './User/pages/Registeruser';
 import Protected from './User/components/Protected';
+import ProtectedAdmin from './Admin/components/ProtectedAdmin';
 import Accueil from './User/pages/Accueil';
 import Patients from './User/pages/Patients';
 import Logadmin from './Admin/pages/Logadmin';
 import Doctors from './User/pages/Doctors';
 import Visits from './User/pages/Visits';
+import Dashboard from './Admin/pages/Dashboard';
 
 function App() {
   const isSignedIn = localStorage.getItem("isSignedIn");
+  const isSignedAdmin = localStorage.getItem("isSignedAdmin")
 
   return (
     <div className="App">
@@ -20,6 +23,14 @@ function App() {
           <Route path="/" element={<Loguser />} />
           <Route path="register" element={<Registeruser />} />
           <Route path="admin" element={<Logadmin />} />
+          <Route 
+            path="dashboard" 
+            element={
+              <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
+                <Dashboard />
+              </ProtectedAdmin>
+            } 
+          />
           <Route 
             path="accueil" 
             element={
@@ -52,6 +63,7 @@ function App() {
               </Protected>
             } 
           />
+          
          {/* <Route 
             path="question" 
             element={

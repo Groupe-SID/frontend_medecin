@@ -1,0 +1,8 @@
+.dashboard-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-color);
+    height: 100%;
+}
