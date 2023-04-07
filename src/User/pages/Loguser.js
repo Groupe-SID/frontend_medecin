@@ -17,6 +17,8 @@ const Loguser = () => {
     const [validatedusername,setValidatedusername] = useState(true)
     const [validatedPassword, setValidatedPassword] = useState(true);
     const [showPass,setShowPass] = useState(false)
+    const [errorPassword,setErrorPass] = useState(false)
+    const [errorUsername,setErrorUsername] = useState(false)
 
     const navigate = useNavigate();
 
@@ -47,9 +49,11 @@ const Loguser = () => {
                 username: username,
                 password: password,
             }).then(function (response) {
+                console.log("STATUS CODE")
+                console.log(response.status)
                 if(response.status === 200){
                     localStorage.setItem('isSignedIn', true);
-                    console.log(response.data)
+                    // console.log(response.data)
                     localStorage.clear()
                     localStorage.setItem('accessToken', response.data.accessToken);
                     localStorage.setItem('isSignedIn', true);
@@ -60,9 +64,24 @@ const Loguser = () => {
                     console.log("Here againa")
                     setLoading(false);
                 }
+                
             })
             .catch((error) => { // error is handled in catch block
-                console.log(error)
+                var mes =error.message
+                var newMes = mes.substr(-3)
+                console.log(newMes)
+                if(parseInt(newMes) == 400){
+                    console.log("Miditra anaty 400")
+                    setErrorUsername(false)
+                    setErrorPass(true)
+                    setLoading(false)
+                }
+                if(parseInt(newMes)  == 404){
+                    console.log("Miditra anaty 404")
+                    setErrorPass(false)
+                    setErrorUsername(true)
+                    setLoading(false)
+                }
             })  
     }, 200);
     }
@@ -79,10 +98,24 @@ const Loguser = () => {
                 </div>
                 <form className='form_login'>
                     <div className='input_login'>
+                    
                     <label  style={{ 
                               color: !validatedusername && '#D32F2F',
                               fontWeight: !validatedusername && 'bold',
                       }}>Username</label>
+                      {errorUsername &&
+                          <p 
+                            id="EmailHelpBlock" 
+                            muted
+                            style={{
+                              fontSize: "10px",
+                              color: "#D32F2F",
+                              fontWeight: "bold"
+                            }}
+                            >
+                              Username not found
+                            </p>                                        
+                      }
                         <input 
                             type="text" 
                             placeholder="Enter your username"
@@ -98,11 +131,25 @@ const Loguser = () => {
                     </div>
                             
                     <div className='input_login'>
+                    
                     <label 
                       style={{ 
                               color: !validatedPassword && '#D32F2F',
                               fontWeight: !validatedPassword && 'bold',
                       }}>Password</label>
+                      {errorPassword &&
+                          <p 
+                            id="EmailHelpBlock" 
+                            muted
+                            style={{
+                              fontSize: "10px",
+                              color: "#D32F2F",
+                              fontWeight: "bold"
+                            }}
+                            >
+                              Please verify your password
+                            </p>                                        
+                      }
                       
                       <input 
                           type= {showPass ? "text" : "password"}    

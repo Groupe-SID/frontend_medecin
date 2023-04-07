@@ -237,7 +237,17 @@
     box-shadow: 0 0 2px rgba(90,90,90,0.7);
     border-radius: 2px;
 }
-
+.input_patients select{
+  width:62%;
+  height:40px;
+  background-color:rgb(245, 245, 245);
+  outline: none;
+  border:none;
+  font-size: 13px;
+  padding-left: 15px;
+  box-shadow: 0 0 2px rgba(90,90,90,0.7);
+  border-radius: 2px;
+}
 .btn_save_cancel{
     width:100%;
     /* border:1px solid purple; */
