@@ -33,7 +33,7 @@ const Doctors = () => {
   const [idModif,setIdModif] = useState()
 
 
-  const loadData = async()=>{
+  const loadData = async() => {
     const response = await axios.get("http://localhost:3001/api/medecins",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
@@ -106,7 +106,7 @@ const Doctors = () => {
   }
 
   const deleteDoctor = (id_doc) =>{
-    if (window.confirm("Are you sur you want to delete this item?")) {
+    if (window.confirm("Are you sure you want to delete this item?")) {
       try
       {
         axios.delete("http://localhost:3001/api/medecins/"+id_doc,{
