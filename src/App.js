@@ -10,6 +10,7 @@ import Logadmin from './Admin/pages/Logadmin';
 import Doctors from './User/pages/Doctors';
 import Visits from './User/pages/Visits';
 import Dashboard from './Admin/pages/Dashboard';
+import Users from './Admin/pages/Users';
 
 function App() {
   const isSignedIn = localStorage.getItem("isSignedIn");
@@ -24,13 +25,21 @@ function App() {
           <Route path="register" element={<Registeruser />} />
           <Route path="admin" element={<Logadmin />} />
           <Route 
-            path="dashboard" 
-            element={
-              <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
-                <Dashboard />
-              </ProtectedAdmin>
-            } 
-          />
+              path="admin/dashboard" 
+              element={
+                <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
+                  <Dashboard />
+                </ProtectedAdmin>
+              } 
+            />
+          <Route 
+              path="admin/users" 
+              element={
+                <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
+                  <Users />
+                </ProtectedAdmin>
+              } 
+            />
           <Route 
             path="accueil" 
             element={

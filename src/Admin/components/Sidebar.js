@@ -3,6 +3,7 @@ import '../css/sidebar.css'
 import logo from '../images/Logo_mc.png'
 import {AiOutlineDashboard} from 'react-icons/ai'
 import {FiUsers, FiActivity, FiLogOut, FiPieChart} from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 
 const sidebar = () => {
@@ -15,50 +16,81 @@ const sidebar = () => {
         <div className='sidebar-menu'>
             <ul className='menu-list'>
               <li className='list-item'>
+                <Link  id="link"  to="/admin/dashboard">
                   <a href="" className='menuLink'>
-                      <AiOutlineDashboard/>
+                      <AiOutlineDashboard className='icon'/>
                       <span className='menu-text'>
                         Dashboard
                       </span>
                   </a>
+                </Link>
               </li>
 
               <li className='list-item'>
+                <Link  id="link"  to="/admin/users">
                   <a href="" className='menuLink'>
-                      <FiUsers/>
+                      <FiUsers className='icon'/>
                       <span className='menu-text'>
                         Users
                       </span>
                   </a>
+                </Link>
               </li>
 
               <li className='list-item'>
+                <Link  id="link"  to="/admin/users">
                   <a href="" className='menuLink'>
-                      <FiActivity/>
+                      <FiActivity className='icon'/>
                       <span className='menu-text'>
                         Activity
                       </span>
                   </a>
+                </Link>
               </li>
 
               <li className='list-item'>
+                <Link  id="link"  to="/admin/users">
                   <a href="" className='menuLink'>
-                      <FiPieChart/>
+                      <FiUsers className='icon'/>
                       <span className='menu-text'>
-                        Statistics
+                        Medecins
                       </span>
                   </a>
+                </Link>
               </li>
 
               <li className='list-item'>
+                <Link  id="link"  to="/admin/users">
                   <a href="" className='menuLink'>
-                      <FiLogOut/>
+                      <FiUsers className='icon'/>
                       <span className='menu-text'>
-                        Log out
+                        Patients
                       </span>
                   </a>
+                </Link>
               </li>
+
+              <li className='list-item'>
+                <Link  id="link"  to="/admin/users">
+                  <a href="" className='menuLink'>
+                      <FiUsers className='icon'/>
+                      <span className='menu-text'>
+                        Traitements
+                      </span>
+                  </a>
+                </Link>
+              </li>
+
+              
             </ul>
+        </div>
+        <div className='sidebar-footer'>
+            <a href="" className='menuLink'>
+                <FiLogOut className='icon'/>
+                <span className='menu-text'>
+                  Log out
+                </span>
+            </a>
         </div>
     </div>
   )

@@ -1,0 +1,58 @@
+:root{
+    --bg-color: #ffffff;
+    --main-color: #0C7A07;
+    --second-color: #7bbb78;
+    --text-color: #000000;
+    --top-color: #f9f9f9;
+}
+.topbar-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+.topbar-search{
+    background: var(--top-color);
+    width: 25%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    border-radius: 5px;
+}
+.topbar-search input{
+    background: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+.fi-icon{
+    font-size: 20px;
+    /* align-self: center; */
+    /* margin-top: 10px; */
+}
+.fi-icon-search{
+    margin-left: 10px;
+}
+.topbar-icon{
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    height: 40px;
+    gap: .5rem;
+    justify-content: flex-end;
+    align-items: center;
+    /* background: var(--top-color); */
+}
+.notif-icon, .user-icon, .set-icon{
+    display: flex;
+    width: 20%;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    background: var(--top-color);
+    border-radius: 5px;
+    cursor: pointer;
+}

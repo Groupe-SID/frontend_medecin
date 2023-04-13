@@ -40,7 +40,7 @@ const Logadmin = () => {
               // console.log(localStorage.getItem('isSignedIn'))
               localStorage.setItem('isSignedAdmin', true);
               console.log("Here")
-              navigate('/dashboard');
+              navigate('dashboard');
           }
       })
       .catch((error) => { // error is handled in catch block
