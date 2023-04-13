@@ -18,9 +18,10 @@
     box-shadow: 1px 0px 4px var(--icon-color);
     width: 20%;
     height: 100%;
-    gap: 2rem;
-    overflow: auto;
-    border:1px solid orange;
+    /* gap: 2rem; */
+    /* overflow: auto; */
+    /* border:1px solid orange; */
+    background-color: rgb(30,30,30);
 }
 a{
     text-decoration: none;
@@ -30,8 +31,8 @@ li{
     display: flex;
 }
 .sidebar-logo{
-    margin-top: 5px;
-    border: 1px solid yellow;
+    margin-top: 15px;
+    /* border: 1px solid yellow; */
 }
 .sidebar-logo img{
     width: 35px;
@@ -41,12 +42,13 @@ li{
     margin-top: 5px;
     font-size: 15px;
     font-weight: 600;
+    color: white;
 }
 .sidebar-menu{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     left: 0;
     top: 0;
 
@@ -66,7 +68,7 @@ li{
 .menuLink{
     align-items: center;
     color: var(--icon-color);
-    /* border: 1px solid green; */
+    /* border: 1px solid pink; */
 }
 .menuLink .menu-text{
     font-weight: 400;
@@ -78,9 +80,16 @@ li{
     
 }
 .sidebar-footer{
-    border: 1px solid green;
+    /* border: 1px solid green; */
+    height:100%;
     /* margin-top: 12rem; */
-    /* justify-self: flex-end; */
+    align-items: flex-end;
+    justify-content: center;
+    display: flex;
+    width:100%;
+    margin-bottom: 20px;
+
+    
     
     bottom: 0;
     margin-right: 1rem;

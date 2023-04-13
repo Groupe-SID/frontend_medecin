@@ -11,6 +11,7 @@ import Doctors from './User/pages/Doctors';
 import Visits from './User/pages/Visits';
 import Dashboard from './Admin/pages/Dashboard';
 import Users from './Admin/pages/Users';
+import TableMedecin from './Admin/pages/TableMedecin';
 
 function App() {
   const isSignedIn = localStorage.getItem("isSignedIn");
@@ -31,7 +32,7 @@ function App() {
                   <Dashboard />
                 </ProtectedAdmin>
               } 
-            />
+          />
           <Route 
               path="admin/users" 
               element={
@@ -39,7 +40,17 @@ function App() {
                   <Users />
                 </ProtectedAdmin>
               } 
-            />
+          />
+          <Route 
+              path="admin/medecins" 
+              element={
+                <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
+                  <TableMedecin />
+                </ProtectedAdmin>
+              } 
+          />
+
+
           <Route 
             path="accueil" 
             element={
