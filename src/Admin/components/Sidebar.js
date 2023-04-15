@@ -3,6 +3,8 @@ import '../css/sidebar.css'
 import logo from '../images/Logo_mc.png'
 import {AiOutlineDashboard} from 'react-icons/ai'
 import {FiUsers, FiActivity, FiLogOut, FiPieChart} from 'react-icons/fi'
+import { FaUserMd } from 'react-icons/fa'
+import { HiUserGroup } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 
 
@@ -49,9 +51,9 @@ const sidebar = () => {
               </li>
 
               <li className='list-item'>
-                <Link  id="link"  to="/admin/users">
+                <Link  id="link"  to="/admin/medecins">
                   <a href="" className='menuLink'>
-                      <FiUsers className='icon'/>
+                      <FaUserMd size={18} className="icon"/>
                       <span className='menu-text'>
                         Medecins
                       </span>
@@ -62,7 +64,7 @@ const sidebar = () => {
               <li className='list-item'>
                 <Link  id="link"  to="/admin/users">
                   <a href="" className='menuLink'>
-                      <FiUsers className='icon'/>
+                      <HiUserGroup  className='icon'/>
                       <span className='menu-text'>
                         Patients
                       </span>
@@ -70,7 +72,7 @@ const sidebar = () => {
                 </Link>
               </li>
 
-              <li className='list-item'>
+              {/* <li className='list-item'>
                 <Link  id="link"  to="/admin/users">
                   <a href="" className='menuLink'>
                       <FiUsers className='icon'/>
@@ -79,7 +81,7 @@ const sidebar = () => {
                       </span>
                   </a>
                 </Link>
-              </li>
+              </li> */}
 
               
             </ul>

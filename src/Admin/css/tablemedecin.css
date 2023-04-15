@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root{
+    --bg-color: #ffffff;
+    --main-color: #0C7A07;
+    --second-color: #7bbb78;
+    --text-color: #000000;
+    --icon-color: #a1a1a1;
+}
+
+.medecins-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-color);
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+.medecins-content{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    padding: 2rem;
+    overflow: auto;
+}
+
+.medecins-body{
+    width: 100%;
+    margin-top: 10px;
+    /* border: 1px solid greenyellow; */
+}
+.medecins-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.medecins-header h3{
+    font-weight: 600;
+}
+
+.medecins-table_header{
+    border-top:1px solid rgba(30, 30, 30,0.1);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    width:100%;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 25px;
+    /* margin-right: 15px; */
+  }
+
+  .medecins-td{
+    width:20%;
+  }
+
+  .medecins-table_item{
+    /* border:3px solid rgb(165, 4, 84); */
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    /* margin-left: 15px;
+    margin-right: 15px; */
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0 0 2px rgba(43, 42, 42, 0.6);
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 13px;
+  }
+
+  .medecins-item{
+    width:20%;
+  }
