@@ -2,13 +2,18 @@
     width:100%;
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: flex-end;
+    text-align: center;
     height:80px;
     box-shadow: 0 1px 3px rgba(30,30,30,0.5);
     margin-bottom: 5%;
+    color:black;
+
 }
 
 #compte_header{
     margin-right: 35px;
     cursor: pointer;
+    margin-left: 5px;
 }

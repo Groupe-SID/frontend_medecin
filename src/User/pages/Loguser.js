@@ -53,11 +53,12 @@ const Loguser = () => {
                 console.log(response.status)
                 if(response.status === 200){
                     localStorage.setItem('isSignedIn', true);
-                    // console.log(response.data)
+                    console.log(response.data)
                     localStorage.clear()
                     localStorage.setItem('accessToken', response.data.accessToken);
+                    localStorage.setItem('utilisateur',response.data.username);
                     localStorage.setItem('isSignedIn', true);
-                    // console.log(localStorage.getItem('isSignedIn'))
+                    console.log(localStorage.getItem('isSignedIn'))
                     localStorage.setItem('isSignedIn', true);
                     console.log("Here")
                     navigate('/accueil');

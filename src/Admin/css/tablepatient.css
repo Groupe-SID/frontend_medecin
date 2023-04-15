@@ -8,7 +8,7 @@
     --icon-color: #a1a1a1;
 }
 
-.medecins-container{
+.patients-container{
     position: relative;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@
     width: 100%;
     font-family: 'Poppins', sans-serif;
 }
-.medecins-content{
+.patients-content{
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -27,21 +27,21 @@
     overflow: auto;
 }
 
-.medecins-body{
+.patients-body{
     width: 100%;
     margin-top: 10px;
     /* border: 1px solid greenyellow; */
 }
-.medecins-header{
+.patients-header{
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
-.medecins-header h3{
+.patients-header h3{
     font-weight: 600;
 }
 
-.medecins-table_header{
+.patients-table_header{
     border-top:1px solid rgba(30, 30, 30,0.1);
     display: flex;
     align-items: center;
@@ -54,11 +54,11 @@
     /* margin-right: 15px; */
   }
 
-  .medecins-td{
+  .patients-td{
     width:20%;
   }
 
-  .medecins-table_item{
+  .patients-table_item{
     /* border:3px solid rgb(165, 4, 84); */
     display: flex;
     align-items: center;
@@ -73,11 +73,11 @@
     font-size: 13px;
   }
 
-  .medecins-item{
+  .patients-item{
     width:20%;
   }
 
-  .medecins-edit_header{
+  .patients-edit_header{
     border-top:1px solid rgba(30, 30, 30,0.1);
     display: flex;
     align-items: center;
@@ -92,7 +92,7 @@
     /* margin-right: 15px; */
   }
 
-  .medecins-content-ligne{
+  .patients-content-ligne{
     /* border:1px solid orange; */
     display: flex;
     flex-direction: column;
@@ -100,7 +100,7 @@
     align-items: flex-start;
   }
 
-  .medecins-ligne-edit{
+  .patients-ligne-edit{
     /* border:2px solid black; */
     display: flex;
     width:300px;
@@ -110,7 +110,7 @@
     align-items: flex-start;
   }
 
-  .medecins-texte-edit{
+  .patients-texte-edit{
     width:50%;
     height:100%;
     border:1px solid rgba(30, 30, 30,0.1);
@@ -120,7 +120,7 @@
     text-align: center;
   }
 
-  .medecins-btn-edit{
+  .patients-btn-edit{
     /* border:2px solid black; */
     display: flex;
     width:300px;
@@ -132,7 +132,7 @@
     font-size: 14px;
   }
 
-  .medecins-btnsave-edit{
+  .patients-btnsave-edit{
     width:50%;
     height:100%;
     background-color: #156410;
@@ -145,11 +145,11 @@
     font-size: 14px;
   }
 
-  .medecins-btnsave-edit:hover{
+  .patients-btnsave-edit:hover{
     background-color: #0C7A07;
   }
 
-  .medecins-btncancel-edit{
+  .patients-btncancel-edit{
     width:50%;
     height:100%;
     background-color: white;
@@ -162,7 +162,7 @@
     font-size: 14px;
   }
 
-  .medecins-btncancel-edit:hover{
+  .patients-btncancel-edit:hover{
     background-color: rgba(30, 30, 30,0.1);
   }
   

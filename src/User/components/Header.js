@@ -2,9 +2,11 @@ import React from 'react'
 import "../css/header.css"
 import {AiOutlineLogout} from "react-icons/ai"
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Header = () => {
   const navigate = useNavigate();
+  const [username,setUsername] = useState(localStorage.getItem('utilisateur'))
 
   const logout = () => {
     if (window.confirm("Do you really want to leave?")) {
@@ -14,6 +16,7 @@ const Header = () => {
   }
   return (
     <div className='header_content'>
+      <b>{username}</b>
       <AiOutlineLogout 
         onClick={logout}
         size={25} 

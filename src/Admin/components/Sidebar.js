@@ -62,7 +62,7 @@ const sidebar = () => {
               </li>
 
               <li className='list-item'>
-                <Link  id="link"  to="/admin/users">
+                <Link  id="link"  to="/admin/patients">
                   <a href="" className='menuLink'>
                       <HiUserGroup  className='icon'/>
                       <span className='menu-text'>

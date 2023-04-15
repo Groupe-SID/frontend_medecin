@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react'
-import '../css/tablemedecin.css'
+import React,{useEffect,useState} from 'react'
+import '../css/tablepatient.css'
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
 import axios from 'axios'
@@ -7,8 +7,7 @@ import { MdOutlineModeEdit } from 'react-icons/md'
 import { BiCheck,BiX } from 'react-icons/bi'
 import ReactSwitch from 'react-switch';
 
-
-const TableMedecin = () => {
+const TablePatient = () => {
     const [listUser,setListUser] = useState([])
     const [accesToken,setAccessToken] = useState(localStorage.getItem('accessToken'))
     const [showListU,setShowListU] = useState(true)
@@ -87,21 +86,21 @@ const TableMedecin = () => {
             axios.post("http://localhost:3001/api/users/privilege",{
                 username: usernameUser,
                 is_granted: toggleInsert,
-                privilege_on: "medecins",
+                privilege_on: "patients",
                 privilege_type: "INSERT"
             }).then(function (response) {
                 if(response.status === 200){
                     axios.post("http://localhost:3001/api/users/privilege",{
                         username: usernameUser,
                         is_granted: toggleUpdate,
-                        privilege_on: "medecins",
+                        privilege_on: "patients",
                         privilege_type: "UPDATE"
                     }).then(function (response) {
                         if(response.status === 200){
                             axios.post("http://localhost:3001/api/users/privilege",{
                                 username: usernameUser,
                                 is_granted: toggleDelete,
-                                privilege_on: "medecins",
+                                privilege_on: "patients",
                                 privilege_type: "DELETE"
                             }).then(function (response) {
                                 if(response.status === 200){
@@ -134,80 +133,78 @@ const TableMedecin = () => {
             console.log(e)
         }
     }
-    
-
   return (
-    <div className='medecins-container'>
+       <div className='patients-container'>
         <Sidebar/>
-        <div className='medecins-content'>
+        <div className='patients-content'>
             <Topbar/>
-            <div className='medecins-body'>
-                <div className='medecins-header'>
-                    <h3>TABLE :<b>MEDECINS</b></h3>
+            <div className='patients-body'>
+                <div className='patients-header'>
+                    <h3>TABLE :<b>PATIENTS</b></h3>
                 </div>
                 {
                     showListU && (
-                        <div className='medecins-tableau'>
-                            <div className='medecins-liste'>
-                                <div className='medecins-table_header'>
-                                    <div className='medecins-td'>
+                        <div className='patients-tableau'>
+                            <div className='patients-liste'>
+                                <div className='patients-table_header'>
+                                    <div className='patients-td'>
                                         Users
                                     </div>
-                                    <div className='medecins-td'>
+                                    <div className='patients-td'>
                                         INSERT
                                     </div>
-                                    <div className='medecins-td'>
+                                    <div className='patients-td'>
                                         UPDATE
                                     </div>
-                                    <div className='medecins-td'>
+                                    <div className='patients-td'>
                                         DELETE
                                     </div>
-                                    <div className='medecins-td'>
+                                    <div className='patients-td'>
                                         Actions
                                     </div>
                                 </div>
                                     {
                                     listUser.length != 0 && listUser.map((user,index)=>(
-                                        <div className='medecins-table_item'>
-                                        <div className='medecins-item'>
-                                            {user.username}
-                                        </div>
-                                        <div className='medecins-item'>
-                                            {user.privileges.medecins.includes('INSERT') ? 
-                                            (
-                                                <BiCheck size={17} color="green" />
-                                            ):(
-                                                <BiX size={17} color="grey" />
-                                            )}
-                                        </div>
-                                        <div className='medecins-item'>
-                                            {user.privileges.medecins.includes('UPDATE') ? 
-                                            (
-                                                <BiCheck size={17} color="green" />
-                                            ):(
-                                                <BiX size={17} color="grey" />
-                                            )}
-                                        </div>
-                                        <div className='medecins-item'>
-                                            {user.privileges.medecins.includes('DELETE') ? 
-                                            (
-                                                <BiCheck size={17} color="green" />
-                                            ):(
-                                                <BiX size={17} color="grey" />
-                                            )}
-                                        </div>
-                                        <div className='medecins-item'>
-                                            {
-                                                user.username == "postgres" ? "ADMIN" :(
-                                                    <MdOutlineModeEdit 
-                                                        className='actions_icon' 
-                                                        onClick={()=>showEUForm(user.id,user.username,user.privileges.medecins)}
-                                                        size={20} 
-                                                        color="rgb(30, 30, 30)"/>
-                                                )      
-                                            }
-                                            
-                                        </div>
+                                        <div className='patients-table_item'>
+                                            <div className='patients-item'>
+                                                {user.username}
+                                            </div>
+                                            <div className='patients-item'>
+                                                {user.privileges.patients.includes('INSERT') ? 
+                                                (
+                                                    <BiCheck size={17} color="green" />
+                                                ):(
+                                                    <BiX size={17} color="grey" />
+                                                )}
+                                            </div>
+                                            <div className='patients-item'>
+                                                {user.privileges.patients.includes('UPDATE') ? 
+                                                (
+                                                    <BiCheck size={17} color="green" />
+                                                ):(
+                                                    <BiX size={17} color="grey" />
+                                                )}
+                                            </div>
+                                            <div className='patients-item'>
+                                                {user.privileges.patients.includes('DELETE') ? 
+                                                (
+                                                    <BiCheck size={17} color="green" />
+                                                ):(
+                                                    <BiX size={17} color="grey" />
+                                                )}
+                                            </div>
+                                            <div className='patients-item'>
+                                                {
+                                                    user.username == "postgres" ? "ADMIN" :(
+                                                        <MdOutlineModeEdit 
+                                                            className='actions_icon' 
+                                                            onClick={()=>showEUForm(user.id,user.username,user.privileges.patients)}
+                                                            size={20} 
+                                                            color="rgb(30, 30, 30)"/>
+                                                    )      
+                                                }
+                                                
+                                            </div>
                                         </div>
                                     ))
                                     }
@@ -218,25 +215,25 @@ const TableMedecin = () => {
 
                 {
                     showEditU && (
-                        <div className='medecins-content-edit'>
-                            <div className='medecins-edit_header'>
+                        <div className='patients-content-edit'>
+                            <div className='patients-edit_header'>
                                 Modifier les privilèges de : <b> {usernameUser} </b>
                             </div>
-                            <div className='medecins-content-ligne'>
+                            <div className='patients-content-ligne'>
                                 {/* {JSON.stringify(privUser)} */}
-                                <div className='medecins-ligne-edit'>
-                                    <div className='medecins-texte-edit'>
+                                <div className='patients-ligne-edit'>
+                                    <div className='patients-texte-edit'>
                                         <b>OPERATIONS</b>
                                     </div>
-                                    <div className='medecins-texte-edit'>
+                                    <div className='patients-texte-edit'>
                                         <b>PRIVILEGES</b>
                                     </div>
                                 </div>
-                                <div className='medecins-ligne-edit'>
-                                    <div className='medecins-texte-edit'>
+                                <div className='patients-ligne-edit'>
+                                    <div className='patients-texte-edit'>
                                         INSERT
                                     </div>
-                                    <div className='medecins-texte-edit'>
+                                    <div className='patients-texte-edit'>
                                         <ReactSwitch
                                             checked={toggleInsert}
                                             onChange={handleChangeInsert}
@@ -244,36 +241,36 @@ const TableMedecin = () => {
                                     </div>
                                     
                                 </div>
-                                <div className='medecins-ligne-edit'>
-                                    <div className='medecins-texte-edit'>
+                                <div className='patients-ligne-edit'>
+                                    <div className='patients-texte-edit'>
                                         UPDATE
                                     </div>
-                                    <div className='medecins-texte-edit'>
+                                    <div className='patients-texte-edit'>
                                         <ReactSwitch
                                             checked={toggleUpdate}
                                             onChange={handleChangeUpdate}
                                         />
                                     </div>
                                 </div>
-                                <div className='medecins-ligne-edit'>
-                                    <div className='medecins-texte-edit'>
+                                <div className='patients-ligne-edit'>
+                                    <div className='patients-texte-edit'>
                                         DELETE
                                     </div>
-                                    <div className='medecins-texte-edit'>
+                                    <div className='patients-texte-edit'>
                                         <ReactSwitch
                                             checked={toggleDelete}
                                             onChange={handleChangeDelete}
                                         />
                                     </div>
                                 </div>
-                                <div className='medecins-btn-edit'>
+                                <div className='patients-btn-edit'>
                                     <div 
-                                        className='medecins-btnsave-edit'
+                                        className='patients-btnsave-edit'
                                         onClick={saveChangePrivilege}>
                                         SAVE CHANGES
                                     </div>
                                     <div 
-                                        className='medecins-btncancel-edit'
+                                        className='patients-btncancel-edit'
                                         onClick={()=>{
                                             setTinsert(false)
                                             setTdelete(false)
@@ -297,4 +294,4 @@ const TableMedecin = () => {
   )
 }
 
-export default TableMedecin
+export default TablePatient
