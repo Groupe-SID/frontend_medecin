@@ -38,7 +38,7 @@ const sidebar = () => {
               </li>
 
               <li className='list-item'>
-                <Link  id="link"  to="/admin/users">
+                <Link  id="link"  to="/admin/activity">
                   <a href="" className='menuLink'>
                       <FiActivity className='icon'/>
                       <span className='menu-text'>

@@ -5,48 +5,49 @@ import '../css/users.css'
 import axios from 'axios'
 import {FiTrash} from 'react-icons/fi'
 
-const initialUser ={
-  id_user: "",
-  username: "",
-  email: "",
-  nom_complet:"",
-  is_admin: false,
-  imageUrl: ""
+const initialActivity ={
+    id: "",
+    nom_table: "",
+    operation: "",
+    description: "",
+    username: "",
+    full_name: "",
+    date_activity: ""
 }
 
-const Users = () => {
-  const [listUser,setListUser] = useState([])
+const Activity = () => {
+  const [listActivity,setListActivity] = useState([])
   const [accesToken,setAccessToken] = useState(localStorage.getItem('accessToken'))
-  const [stateUser,setStateUser] = useState(initialUser)
-  const {num_user,username,email,nom_complet,is_admin} = stateUser
+  const [stateActivity,setStateActivity] = useState(initialActivity)
+  const {id,nom_table,operation,description,username,full_name,date_activity} = stateActivity
   const [showList,setShowList] =useState(true)
 
 
   const loadData = async()=>{
-    const response = await axios.get("http://localhost:3001/api/users",{headers:{
+    const response = await axios.get("http://localhost:3001/api/users_activities",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
-    setListUser(response.data);
+    setListActivity(response.data);
 
   }
 
   useEffect(() => {
-    getAllUsers();
+    getAllActivity();
     loadData();
  }, []);
 
- const getAllUsers = () => {
+ const getAllActivity = () => {
   console.log(accesToken)
   try
   {
-    axios.get("http://localhost:3001/api/users",{
+    axios.get("http://localhost:3001/api/users_activities",{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }
     }).then(function (response) {
       if(response.status === 200){
           console.log(response.data)
-          setListUser(response.data)
+          setListActivity(response.data)
       }
     }).catch((error) => { // error is handled in catch block
       console.log(error)
@@ -54,28 +55,6 @@ const Users = () => {
   }
   catch(e){
     console.log(e)
-  }
-}
-
-const deleteUser = (id_user) =>{
-  if (window.confirm("Are you sur you want to delete this item?")) {
-    try
-    {
-      axios.delete("http://localhost:3001/api/users/"+id_user,{
-        headers :{
-          'Authorization':'Bearer '+ accesToken
-        }
-      }).then(function (response) {
-        if(response.status === 200){
-            loadData()
-        }
-      }).catch((error) => { // error is handled in catch block
-        console.log(error)
-      })  
-    }
-    catch(e){
-      console.log(e)
-    }
   }
 }
 
@@ -87,7 +66,7 @@ const deleteUser = (id_user) =>{
           <Topbar/>
           <div className='user-body'>
             <div className='user-header'>
-              <h2>Users</h2>
+              <h2>Users Activity</h2>
             </div>
             {
               showList && (
@@ -97,47 +76,47 @@ const deleteUser = (id_user) =>{
                     N°
                   </div>
                   <div className='td_users'>
+                    Table
+                  </div>
+                  <div className='td_users'>
+                    Opération
+                  </div>
+                  <div className='td_users'>
+                    Description
+                  </div>
+                  <div className='td_users'>
                     Username
                   </div>
                   <div className='td_users'>
-                    Email
+                    Full Name
                   </div>
                   <div className='td_users'>
-                    Name
-                  </div>
-                  <div className='td_users'>
-                    Type
-                  </div>
-                  <div className='td_users'>
-                    Action
+                    Date
                   </div>
                 </div>
                 {
-                  listUser.length != 0 && listUser.map((user,index)=>(
+                  listActivity.length != 0 && listActivity.map((act,index)=>(
                     <div className='table_item_users'>
                       <div className='item_users'>
-                        {user.id}
+                        {act.id}
                       </div>
                       <div className='item_users'>
-                        {user.username}
+                        {act.nom_table}
                       </div>
                       <div className='item_users'>
-                        {user.email}
+                        {act.operation}
                       </div>
                       <div className='item_users'>
-                        {user.nom_complet}
+                        {act.description}
                       </div>
                       <div className='item_users'>
-                        {user.is_admin == true ? "Admin" : "user"}
+                        {act.username}
                       </div>
                       <div className='item_users'>
-                        <div className='action_delete' onClick={()=>deleteUser(user.id)}>
-                          <p>Delete</p>
-                          <FiTrash
-                            className='actions_icon' 
-                            size={15} 
-                            color="#ffffff"/>
-                        </div>
+                        {act.full_name}
+                      </div>
+                      <div className='item_users'>
+                        {act.date_activity}
                       </div>
                     </div>
                   ))
@@ -151,4 +130,4 @@ const deleteUser = (id_user) =>{
   )
 }
 
-export default Users
+export default Activity

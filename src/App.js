@@ -11,6 +11,7 @@ import Doctors from './User/pages/Doctors';
 import Visits from './User/pages/Visits';
 import Dashboard from './Admin/pages/Dashboard';
 import Users from './Admin/pages/Users';
+import Activity from './Admin/pages/Activity';
 
 function App() {
   const isSignedIn = localStorage.getItem("isSignedIn");
@@ -37,6 +38,14 @@ function App() {
               element={
                 <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
                   <Users />
+                </ProtectedAdmin>
+              } 
+            />
+            <Route 
+              path="admin/activity" 
+              element={
+                <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
+                  <Activity />
                 </ProtectedAdmin>
               } 
             />

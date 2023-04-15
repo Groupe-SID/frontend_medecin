@@ -20,7 +20,7 @@
     height: 100%;
     gap: 2rem;
     overflow: auto;
-    border:1px solid orange;
+    /* border:1px solid orange; */
 }
 a{
     text-decoration: none;
@@ -31,7 +31,7 @@ li{
 }
 .sidebar-logo{
     margin-top: 5px;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
 }
 .sidebar-logo img{
     width: 35px;
@@ -46,7 +46,7 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     left: 0;
     top: 0;
 
@@ -78,7 +78,7 @@ li{
     
 }
 .sidebar-footer{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     /* margin-top: 12rem; */
     /* justify-self: flex-end; */
     

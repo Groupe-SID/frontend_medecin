@@ -39,3 +39,62 @@
 .user-header h2{
     font-weight: 600;
 }
+
+/* BODY */
+
+.table_header_users{
+    border-top:2px solid rgba(30, 30, 30,0.2);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    width:100%;
+    font-weight: bold;
+}
+
+.td_users{
+    width:20%;
+    margin-left: 13px;
+}
+
+.table_item_users{
+    /* border:3px solid rgb(165, 4, 84); */
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0 0 2px rgba(43, 42, 42, 0.6);
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.item_users{
+    width:17%;
+}
+
+.actions_icon{
+    margin-right: 10px;
+    cursor: pointer;
+  }
+.action_delete{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 30px;
+    background-color: var(--main-color);
+    gap: .2rem;
+    border-radius: 5px;
+    /* border: 1px solid var(--main-color); */
+    color: var(--bg-color);
+    margin-left: 55px;
+    cursor: pointer;
+}
+.action_delete p{
+    font-size: 12px;
+    align-self: center;
+    margin-left: 10px;
+}
