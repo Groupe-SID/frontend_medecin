@@ -143,7 +143,7 @@ const TableMedecin = () => {
             <Topbar/>
             <div className='medecins-body'>
                 <div className='medecins-header'>
-                    <h3>TABLE :<b>MEDECINS</b></h3>
+                    <h3>TABLE : <b>MEDECINS</b></h3>
                 </div>
                 {
                     showListU && (

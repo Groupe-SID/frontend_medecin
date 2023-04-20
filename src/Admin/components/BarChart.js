@@ -10,7 +10,7 @@ ChartJS.register(
 
 const BarChart = () => {
     var data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+        labels: ['2019', '2020', '2021', '2022', '2023'],
         datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],

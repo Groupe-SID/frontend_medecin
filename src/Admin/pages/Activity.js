@@ -1,9 +1,8 @@
 import React,{useEffect,useState} from 'react'
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
-import '../css/users.css'
+import '../css/activity.css'
 import axios from 'axios'
-import {FiTrash} from 'react-icons/fi'
 
 const initialActivity ={
     id: "",
@@ -60,63 +59,57 @@ const Activity = () => {
 
 
   return (
-    <div className='user-container'>
+    <div className='activity-container'>
         <Sidebar/>
-        <div className='user-content'>
+        <div className='activity-content'>
           <Topbar/>
-          <div className='user-body'>
-            <div className='user-header'>
+          <div className='activity-body'>
+            <div className='activity-header'>
               <h2>Users Activity</h2>
             </div>
             {
               showList && (
-                <div className='liste_users'>
-                <div className='table_header_users'>
-                  <div className='td_users'>
+                <div className='liste_activity'>
+                <div className='table_header_activity'>
+                  <div className='td_activity'>
                     N°
                   </div>
-                  <div className='td_users'>
-                    Table
-                  </div>
-                  <div className='td_users'>
-                    Opération
-                  </div>
-                  <div className='td_users'>
-                    Description
-                  </div>
-                  <div className='td_users'>
+                  <div className='td_activity'>
                     Username
                   </div>
-                  <div className='td_users'>
-                    Full Name
+                  <div className='td_activity'>
+                    Opération
                   </div>
-                  <div className='td_users'>
+                  <div className='td_activity' id='table'>
+                    Table
+                  </div>
+                  <div className='td_activity' id='detail'>
+                    Détails
+                  </div>
+                  <div className='td_activity'>
                     Date
                   </div>
                 </div>
                 {
                   listActivity.length != 0 && listActivity.map((act,index)=>(
-                    <div className='table_item_users'>
-                      <div className='item_users'>
+                    <div className='table_item_activity'>
+                      <div className='item_activity'>
                         {act.id}
                       </div>
-                      <div className='item_users'>
-                        {act.nom_table}
+                      <div className='item_activity'>
+                        {act.achieved_by}
                       </div>
-                      <div className='item_users'>
+                      <div className='item_activity'>
                         {act.operation}
                       </div>
-                      <div className='item_users'>
+                      <div className='item_activity' >
+                        {act.activity_on}
+                      </div>
+                      <div className='item_activity' id='description'>
                         {act.description}
                       </div>
-                      <div className='item_users'>
-                        {act.username}
-                      </div>
-                      <div className='item_users'>
-                        {act.full_name}
-                      </div>
-                      <div className='item_users'>
-                        {act.date_activity}
+                      <div className='item_activity'>
+                        {act.achieved_at.slice(0, 10)}
                       </div>
                     </div>
                   ))
