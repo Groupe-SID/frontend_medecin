@@ -14,6 +14,7 @@ import Users from './Admin/pages/Users';
 import Activity from './Admin/pages/Activity';
 import TableMedecin from './Admin/pages/TableMedecin';
 import TablePatient from './Admin/pages/TablePatient';
+import TableTraitement from './Admin/pages/TableTraitement';
 
 
 function App() {
@@ -68,6 +69,15 @@ function App() {
               element={
                 <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
                   <TablePatient />
+                </ProtectedAdmin>
+              } 
+          />
+
+          <Route 
+              path="admin/traitements" 
+              element={
+                <ProtectedAdmin isSignedAdmin={isSignedAdmin}>
+                  <TableTraitement />
                 </ProtectedAdmin>
               } 
           />

@@ -1,6 +1,5 @@
 import React,{useEffect,useState,useRef} from 'react'
 import "../css/patients.css"
-import {ImStatsBars} from "react-icons/im"
 import {FaUserMd} from "react-icons/fa"
 import {HiUserGroup} from "react-icons/hi"
 import {BsCalendarPlus} from "react-icons/bs"
@@ -41,8 +40,8 @@ const Patients = () => {
   const [idModif,setIdModif] = useState()
   const [user_id,setUser_id] = useState(localStorage.getItem('user_id'))
   const [userInfo,setUserInfo] =useState()
-  const [privMedecins,setPrivMedecins] = useState([])
   const [privPatients,setPrivPatients] = useState([])
+  const [privTraitements,setPrivTrait] = useState([])
 
   const navigate = useNavigate();
 
@@ -103,8 +102,8 @@ const Patients = () => {
       if(response.status === 200){
           console.log(response.data)
           setUserInfo(response.data)
-          setPrivMedecins(response.data.privileges.medecins)
           setPrivPatients(response.data.privileges.patients)
+          setPrivTrait(response.data.privileges.traitements)
       }
     }).catch((error) => { // error is handled in catch block
       console.log(error)
@@ -443,45 +442,57 @@ const Patients = () => {
                         {doc.adresse}
                       </div>
                       <div className='item_patients'>
-                      <TiEye
-                          className='actions_icon' 
-                          onClick={()=>showVF(doc.id,doc.nom,doc.prenoms)}
-                          size={22} 
-                          color="rgb(30, 30, 30)"/>
+                        {
+                            privTraitements.includes('INSERT') &&(
+                              <TiEye
+                                className='actions_icon' 
+                                onClick={()=>showVF(doc.id,doc.nom,doc.prenoms)}
+                                size={22} 
+                                color="rgb(30, 30, 30)"/>
+                            )
+                          }
+                          {
+                            !privTraitements.includes('INSERT') &&(
+                              <div className='no_actions_icon'>
+                                N/A
+                              </div>
+                            )
+                          }
+                      
 
-                        {
-                          privPatients.includes('UPDATE') &&(
-                            <MdOutlineModeEdit 
-                            className='actions_icon' 
-                            onClick={()=>showEditForm(doc.id,doc.nom,doc.prenoms,doc.genre,doc.adresse)}
-                            size={20} 
-                            color="rgb(30, 30, 30)"/>
-                          )
-                        }
-                        {
-                          !privPatients.includes('UPDATE') &&(
-                            <div className='no_actions_icon'>
-                              N/A
-                            </div>
-                          )
-                        }
-
-                        {
-                          privPatients.includes('DELETE') &&(
-                            <IoTrashSharp 
+                          {
+                            privPatients.includes('UPDATE') &&(
+                              <MdOutlineModeEdit 
                               className='actions_icon' 
+                              onClick={()=>showEditForm(doc.id,doc.nom,doc.prenoms,doc.genre,doc.adresse)}
                               size={20} 
-                              onClick={()=>deletePatient(doc.id)}
                               color="rgb(30, 30, 30)"/>
-                          )
-                        }
-                        {
-                          !privPatients.includes('DELETE') &&(
-                            <div className='no_actions_icon'>
-                              N/A
-                            </div>
-                          )
-                        }
+                            )
+                          }
+                          {
+                            !privPatients.includes('UPDATE') &&(
+                              <div className='no_actions_icon'>
+                                N/A
+                              </div>
+                            )
+                          }
+
+                          {
+                            privPatients.includes('DELETE') &&(
+                              <IoTrashSharp 
+                                className='actions_icon' 
+                                size={20} 
+                                onClick={()=>deletePatient(doc.id)}
+                                color="rgb(30, 30, 30)"/>
+                            )
+                          }
+                          {
+                            !privPatients.includes('DELETE') &&(
+                              <div className='no_actions_icon'>
+                                N/A
+                              </div>
+                            )
+                          }
                         
                       </div>
                     </div>

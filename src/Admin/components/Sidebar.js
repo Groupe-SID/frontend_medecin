@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 import '../css/sidebar.css'
 import logo from '../images/Logo_mc.png'
 import {AiOutlineDashboard} from 'react-icons/ai'
-import {FiUsers, FiActivity, FiLogOut, FiPieChart} from 'react-icons/fi'
+import {FiUsers, FiActivity, FiLogOut} from 'react-icons/fi'
+import {BsCalendarPlus} from 'react-icons/bs'
 import { FaUserMd } from 'react-icons/fa'
 import { HiUserGroup } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
@@ -27,69 +28,69 @@ const Sidebar = () => {
             <ul className='menu-list'>
               <li className='list-item'>
                 <Link  id="link"  to="/admin/dashboard">
-                  <a href="" className='menuLink'>
+                  <div  className='menuLink'>
                       <AiOutlineDashboard className='icon'/>
                       <span className='menu-text'>
                         Dashboard
                       </span>
-                  </a>
+                  </div>
                 </Link>
               </li>
 
               <li className='list-item'>
                 <Link  id="link"  to="/admin/users">
-                  <a href="" className='menuLink'>
+                  <div  className='menuLink'>
                       <FiUsers className='icon'/>
                       <span className='menu-text'>
                         Users
                       </span>
-                  </a>
+                  </div>
                 </Link>
               </li>
 
               <li className='list-item'>
                 <Link  id="link"  to="/admin/activity">
-                  <a href="" className='menuLink'>
+                  <div  className='menuLink'>
                       <FiActivity className='icon'/>
                       <span className='menu-text'>
                         Activity
                       </span>
-                  </a>
+                  </div>
                 </Link>
               </li>
 
               <li className='list-item'>
                 <Link  id="link"  to="/admin/medecins">
-                  <a href="" className='menuLink'>
+                  <div  className='menuLink'>
                       <FaUserMd size={18} className="icon"/>
                       <span className='menu-text'>
                         Medecins
                       </span>
-                  </a>
+                  </div>
                 </Link>
               </li>
 
               <li className='list-item'>
                 <Link  id="link"  to="/admin/patients">
-                  <a href="" className='menuLink'>
+                  <div  className='menuLink'>
                       <HiUserGroup  className='icon'/>
                       <span className='menu-text'>
                         Patients
                       </span>
-                  </a>
+                  </div>
                 </Link>
               </li>
 
-              {/* <li className='list-item'>
-                <Link  id="link"  to="/admin/users">
-                  <a href="" className='menuLink'>
-                      <FiUsers className='icon'/>
+              <li className='list-item'>
+                <Link  id="link"  to="/admin/traitements">
+                  <div  className='menuLink'>
+                      <BsCalendarPlus className="icon" size={18} />
                       <span className='menu-text'>
                         Traitements
                       </span>
-                  </a>
+                  </div>
                 </Link>
-              </li> */}
+              </li>
 
               
             </ul>

@@ -62,13 +62,18 @@ li{
     /* position: relative; */
 }
 .menuLink:hover{
-    color: var(--text-color);
+    color: #0C7A07;
     transition: 0;
 }
 .menuLink{
     align-items: center;
     color: var(--icon-color);
     /* border: 1px solid pink; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .menuLink .menu-text{
     font-weight: 400;
@@ -104,3 +109,4 @@ li{
 #link{
     text-decoration: none;
 }
+

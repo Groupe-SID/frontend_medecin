@@ -186,7 +186,10 @@
 
   .item_visits{
     width:20%;
-    /* border:1px solid black; */
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .form_add_visits{
@@ -337,4 +340,14 @@
   .actions_icon{
     margin-right: 10px;
     cursor: pointer;
+  }
+
+  .no_actions_icon{
+    margin-right: 10px;
+    font-size: 13px;
+    font-family: "Century gothic";
+    width:20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }

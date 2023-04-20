@@ -30,6 +30,9 @@ const Visits = () => {
   const [listMed,setListMed] = useState([])
   const [nomP,setNomP] =useState()
   const [id_doc,setIdDoc] =useState()
+  const [user_id,setUser_id] = useState(localStorage.getItem('user_id'))
+  const [userInfo,setUserInfo] =useState()
+  const [privTraitements,setPrivTrait] = useState([])
 
   const [date, setDate] = useState();
   const dateInputRef = useRef(null);
@@ -43,6 +46,11 @@ const Visits = () => {
       'Authorization':'Bearer '+ accesToken
     }});
     setListVisit(response.data);
+
+    const response2 = await axios.get("http://localhost:3001/api/users/"+user_id,{headers:{
+      'Authorization':'Bearer '+ accesToken
+    }});
+    setUserInfo(response2.data);
   }
 
   
@@ -54,6 +62,7 @@ const Visits = () => {
   useEffect(() => {
     getAllVisits();
     getAllDoctors();
+    getUserById();
     loadData();
  }, []);
 
@@ -119,6 +128,28 @@ const Visits = () => {
   //   }
   // }
 
+  const getUserById = () =>{
+    try
+    {
+      axios.get("http://localhost:3001/api/users/"+user_id,{
+        headers :{
+          'Authorization':'Bearer '+ accesToken
+        }
+      }).then(function (response) {
+        if(response.status === 200){
+            console.log(response.data)
+            setUserInfo(response.data)
+            setPrivTrait(response.data.privileges.traitements)
+        }
+      }).catch((error) => { // error is handled in catch block
+        console.log(error)
+      })  
+    }
+    catch(e){
+      console.log(e)
+    }
+  
+  }
   
 
   const getAllDoctors = () => {
@@ -295,15 +326,7 @@ const Visits = () => {
                 <div className='texte_visits'>
                     Medical consultations
                 </div>
-                <div className='add_visits' onClick={()=>{
-                  // setStateDoctor(initialDoctor)
-                  // setShowAddForm(true)
-                  // setShowEdit(false)
-                  setShowList(false)
-                 
-                  }}>
-                    <IoAddOutline size={28} id="icon_add" color='white' fill='white'/>
-                </div>
+
             </div>
             {
               showList && (
@@ -341,16 +364,40 @@ const Visits = () => {
                         {doc.datecons.slice(0, 10)}
                       </div>
                       <div className='item_visits'>
-                        <MdOutlineModeEdit 
-                          className='actions_icon' 
-                          onClick={()=>showEditVF(doc.id,doc.medecin_id,doc.patient_id,doc.datecons)}
-                          size={20} 
-                          color="rgb(30, 30, 30)"/>
-                        <IoTrashSharp 
-                          className='actions_icon' 
-                          size={20} 
-                           onClick={()=>deleteVisits(doc.id)}
-                          color="rgb(30, 30, 30)"/>
+                          {
+                            privTraitements.includes('UPDATE') &&(
+                              <MdOutlineModeEdit 
+                                className='actions_icon' 
+                                onClick={()=>showEditVF(doc.id,doc.medecin_id,doc.patient_id,doc.datecons)}
+                                size={20} 
+                                color="rgb(30, 30, 30)"/> 
+                            )
+                          }
+                          {
+                            !privTraitements.includes('UPDATE') &&(
+                              <div className='no_actions_icon'>
+                                N/A
+                              </div>
+                            )
+                          }
+                          {
+                            privTraitements.includes('DELETE') &&(
+                              <IoTrashSharp 
+                                className='actions_icon' 
+                                size={20} 
+                                onClick={()=>deleteVisits(doc.id)}
+                                color="rgb(30, 30, 30)"/> 
+                            )
+                          }
+                          {
+                            !privTraitements.includes('DELETE') &&(
+                              <div className='no_actions_icon'>
+                                N/A
+                              </div>
+                            )
+                          }
+                        
+                        
                       </div>
                     </div>
                   ))
