@@ -32,6 +32,10 @@ const Doctors = () => {
   const [showList,setShowList] =useState(true)
   const [idModif,setIdModif] = useState()
   const [UUsername,setUUsername] = useState(localStorage.getItem('utilisateur'))
+  const [user_id,setUser_id] = useState(localStorage.getItem('user_id'))
+  const [userInfo,setUserInfo] =useState()
+  const [privMedecins,setPrivMedecins] = useState([])
+  const [privPatients,setPrivPatients] = useState([])
 
 
   const loadData = async() => {
@@ -39,6 +43,11 @@ const Doctors = () => {
       'Authorization':'Bearer '+ accesToken
     }});
     setListDoc(response.data);
+
+    const response1 = await axios.get("http://localhost:3001/api/users/"+user_id,{headers:{
+      'Authorization':'Bearer '+ accesToken
+    }});
+    setUserInfo(response1.data);
   }
 
   
@@ -49,8 +58,33 @@ const Doctors = () => {
 
   useEffect(() => {
     getAllDoctors();
+    getUserById();
     loadData();
  }, []);
+
+  const getUserById = () =>{
+    try
+    {
+      axios.get("http://localhost:3001/api/users/"+user_id,{
+        headers :{
+          'Authorization':'Bearer '+ accesToken
+        }
+      }).then(function (response) {
+        if(response.status === 200){
+            console.log(response.data)
+            setUserInfo(response.data)
+            setPrivMedecins(response.data.privileges.medecins)
+            setPrivPatients(response.data.privileges.patients)
+        }
+      }).catch((error) => { // error is handled in catch block
+        console.log(error)
+      })  
+    }
+    catch(e){
+      console.log(e)
+    }
+
+  }
 
   const getAllDoctors = () => {
     console.log(accesToken)
@@ -183,14 +217,14 @@ const Doctors = () => {
           {/* <GiTreeBranch size={35} color="green"/> */}
           MEDICAL CARE
         </div>
-        <Link  id="link"  to="/accueil">
+        {/* <Link  id="link"  to="/accueil">
           <div className='middle_menu'>
                 <div className='icon_menu'>
                   <ImStatsBars size={20} color="rgb(214, 212, 212)"/>
                 </div>
                 Dashboard
           </div>
-        </Link>
+        </Link> */}
 
         <Link  id="link"  to="/doctors">
           <div className='middle_menu' id='active_menu'>
@@ -228,15 +262,28 @@ const Doctors = () => {
                 <div className='texte_doctors'>
                     Doctors
                 </div>
-                <div className='add_doctors' onClick={()=>{
-                  setStateDoctor(initialDoctor)
-                  setShowAddForm(true)
-                  setShowEdit(false)
-                  setShowList(false)
-                 
-                  }}>
-                    <IoAddOutline size={28} id="icon_add" color='white' fill='white'/>
-                </div>
+
+                {
+                  privMedecins.includes('INSERT') && (
+                    <div className='add_doctors' onClick={()=>{
+                      setStateDoctor(initialDoctor)
+                      setShowAddForm(true)
+                      setShowEdit(false)
+                      setShowList(false)
+                     
+                      }}>
+                        <IoAddOutline size={28} id="icon_add" color='white' fill='white'/>
+                    </div>
+                  )
+                }
+                {
+                  !privMedecins.includes('INSERT') && (
+                    <div className='no_add_doctors'>
+                        UNAUTHORIZED
+                    </div>
+                  )
+                }
+               
             </div>
             {
               showList && (
@@ -280,16 +327,41 @@ const Doctors = () => {
                         {doc.createdAt.slice(0, 10)}
                       </div>
                       <div className='item_doctors'>
-                        <MdOutlineModeEdit 
-                          className='actions_icon' 
-                          onClick={()=>showEditForm(doc.id,doc.num_medecin,doc.nom,doc.prenoms,doc.tj)}
-                          size={20} 
-                          color="rgb(30, 30, 30)"/>
-                        <IoTrashSharp 
-                          className='actions_icon' 
-                          size={20} 
-                          onClick={()=>deleteDoctor(doc.id)}
-                          color="rgb(30, 30, 30)"/>
+                        {
+                          privMedecins.includes('UPDATE') &&(
+                            <MdOutlineModeEdit 
+                            className='actions_icon' 
+                            onClick={()=>showEditForm(doc.id,doc.num_medecin,doc.nom,doc.prenoms,doc.tj)}
+                            size={20} 
+                            color="rgb(30, 30, 30)"/>
+                          )
+                        }
+                        {
+                          !privMedecins.includes('UPDATE') &&(
+                            <div className='no_actions_icon'>
+                              N/A
+                            </div>
+                          )
+                        }
+
+                        {
+                          privMedecins.includes('DELETE') &&(
+                            <IoTrashSharp 
+                            className='actions_icon' 
+                            size={20} 
+                            onClick={()=>deleteDoctor(doc.id)}
+                            color="rgb(30, 30, 30)"/>
+                          )
+                        }
+                        {
+                          !privMedecins.includes('DELETE') &&(
+                            <div className='no_actions_icon'>
+                              N/A
+                            </div>
+                          )
+                        }
+                       
+                       
                       </div>
                     </div>
                   ))

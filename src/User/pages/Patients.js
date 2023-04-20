@@ -39,6 +39,10 @@ const Patients = () => {
   const [showEdit,setShowEdit] = useState(false)
   const [showList,setShowList] =useState(true)
   const [idModif,setIdModif] = useState()
+  const [user_id,setUser_id] = useState(localStorage.getItem('user_id'))
+  const [userInfo,setUserInfo] =useState()
+  const [privMedecins,setPrivMedecins] = useState([])
+  const [privPatients,setPrivPatients] = useState([])
 
   const navigate = useNavigate();
 
@@ -65,6 +69,11 @@ const Patients = () => {
       'Authorization':'Bearer '+ accesToken
     }});
     setListMed(response1.data);
+    
+    const response2 = await axios.get("http://localhost:3001/api/users/"+user_id,{headers:{
+      'Authorization':'Bearer '+ accesToken
+    }});
+    setUserInfo(response2.data);
   }
   
   const handleInputChange = (e) => {
@@ -79,8 +88,34 @@ const Patients = () => {
   useEffect(() => {
     getAllPatients();
     getAllDoctors();
+    getUserById();
     loadData();
  }, []);
+
+ const getUserById = () =>{
+  try
+  {
+    axios.get("http://localhost:3001/api/users/"+user_id,{
+      headers :{
+        'Authorization':'Bearer '+ accesToken
+      }
+    }).then(function (response) {
+      if(response.status === 200){
+          console.log(response.data)
+          setUserInfo(response.data)
+          setPrivMedecins(response.data.privileges.medecins)
+          setPrivPatients(response.data.privileges.patients)
+      }
+    }).catch((error) => { // error is handled in catch block
+      console.log(error)
+    })  
+  }
+  catch(e){
+    console.log(e)
+  }
+
+}
+
 
   const getAllPatients = () => {
     console.log(accesToken)
@@ -298,14 +333,14 @@ const Patients = () => {
           <img src={logo_mc} alt="Logo Medical Care" className='logo_mc'/>
           MEDICAL CARE
         </div>
-        <Link  id="link"  to="/accueil">
+        {/* <Link  id="link"  to="/accueil">
           <div className='middle_menu'>
                 <div className='icon_menu'>
                   <ImStatsBars size={20} color="rgb(214, 212, 212)"/>
                 </div>
                 Dashboard
           </div>
-        </Link>
+        </Link> */}
 
         <Link  id="link"  to="/doctors">
           <div className='middle_menu'>
@@ -343,16 +378,28 @@ const Patients = () => {
                 <div className='texte_patients'>
                     Patients
                 </div>
-                <div className='add_patients' onClick={()=>{
-                  setStatePatient(initialPatient)
-                  setShowAddForm(true)
-                  setShowEdit(false)
-                  setShowList(false)
-                  setSVF(false)
-                 
-                  }}>
-                    <IoAddOutline size={28} id="icon_add" color='white' fill='white'/>
-                </div>
+                {
+                  privPatients.includes('INSERT') && (
+                    <div className='add_patients' onClick={()=>{
+                      setStatePatient(initialPatient)
+                      setShowAddForm(true)
+                      setShowEdit(false)
+                      setShowList(false)
+                      setSVF(false)
+                     
+                      }}>
+                        <IoAddOutline size={28} id="icon_add" color='white' fill='white'/>
+                    </div>
+                  )
+                }
+                {
+                  !privPatients.includes('INSERT') && (
+                    <div className='no_add_patients'>
+                        UNAUTHORIZED
+                    </div>
+                  )
+                }
+                
             </div>
             {
               showList && (
@@ -401,16 +448,40 @@ const Patients = () => {
                           onClick={()=>showVF(doc.id,doc.nom,doc.prenoms)}
                           size={22} 
                           color="rgb(30, 30, 30)"/>
-                        <MdOutlineModeEdit 
-                          className='actions_icon' 
-                          onClick={()=>showEditForm(doc.id,doc.nom,doc.prenoms,doc.genre,doc.adresse)}
-                          size={20} 
-                          color="rgb(30, 30, 30)"/>
-                        <IoTrashSharp 
-                          className='actions_icon' 
-                          size={20} 
-                          onClick={()=>deletePatient(doc.id)}
-                          color="rgb(30, 30, 30)"/>
+
+                        {
+                          privPatients.includes('UPDATE') &&(
+                            <MdOutlineModeEdit 
+                            className='actions_icon' 
+                            onClick={()=>showEditForm(doc.id,doc.nom,doc.prenoms,doc.genre,doc.adresse)}
+                            size={20} 
+                            color="rgb(30, 30, 30)"/>
+                          )
+                        }
+                        {
+                          !privPatients.includes('UPDATE') &&(
+                            <div className='no_actions_icon'>
+                              N/A
+                            </div>
+                          )
+                        }
+
+                        {
+                          privPatients.includes('DELETE') &&(
+                            <IoTrashSharp 
+                              className='actions_icon' 
+                              size={20} 
+                              onClick={()=>deletePatient(doc.id)}
+                              color="rgb(30, 30, 30)"/>
+                          )
+                        }
+                        {
+                          !privPatients.includes('DELETE') &&(
+                            <div className='no_actions_icon'>
+                              N/A
+                            </div>
+                          )
+                        }
                         
                       </div>
                     </div>

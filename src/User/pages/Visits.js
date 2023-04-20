@@ -250,14 +250,14 @@ const Visits = () => {
         <img src={logo_mc} alt="Logo Medical Care" className='logo_mc'/>
         MEDICAL CARE
       </div>
-      <Link  id="link"  to="/accueil">
+      {/* <Link  id="link"  to="/accueil">
         <div className='middle_menu' >
               <div className='icon_menu'>
                 <ImStatsBars size={20} color="rgb(214, 212, 212)"/>
               </div>
               Dashboard
         </div>
-      </Link>
+      </Link> */}
 
       <Link  id="link"  to="/doctors">
         <div className='middle_menu'>

@@ -112,6 +112,27 @@
     color: white;
 }
 
+.no_add_patients {
+  position: relative;
+  background-color: #626b62;
+  box-shadow: 1px 1px 3px #7f807f;
+  border: none;
+  width:150px;
+  height:47px;
+  border-radius: 5px;
+  font-size: 13px;
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 30px;
+  font-family: "century gothic";
+}
+
 .add_patients {
     position: relative;
     background-color: #005B00;
@@ -185,6 +206,10 @@
 
   .item_patients{
     width:17%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .form_add_patients{
@@ -345,4 +370,14 @@
   .actions_icon{
     margin-right: 10px;
     cursor: pointer;
+  }
+
+  .no_actions_icon{
+    margin-right: 10px;
+    font-size: 13px;
+    font-family: "Century gothic";
+    width:20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
