@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../css/sidebar.css'
 import logo from '../images/Logo_mc.png'
 import {AiOutlineDashboard} from 'react-icons/ai'
@@ -6,9 +6,17 @@ import {FiUsers, FiActivity, FiLogOut, FiPieChart} from 'react-icons/fi'
 import { FaUserMd } from 'react-icons/fa'
 import { HiUserGroup } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 
-const sidebar = () => {
+const Sidebar = () => {
+  // const navigate = useNavigate();
+  // const logoutAdmin = () => {
+  //   if (window.confirm("Do you really want to leave?")) {
+  //     localStorage.clear();
+  //     navigate("/admin")
+  //   }
+  // }
   return (
     <div className='sidebar'>
         <div className='sidebar-logo'>
@@ -87,7 +95,7 @@ const sidebar = () => {
             </ul>
         </div>
         <div className='sidebar-footer'>
-            <a href="" className='menuLink'>
+            <a href="" className='menuLink' >
                 <FiLogOut className='icon'/>
                 <span className='menu-text'>
                   Log out
@@ -98,4 +106,4 @@ const sidebar = () => {
   )
 }
 
-export default sidebar
+export default Sidebar
