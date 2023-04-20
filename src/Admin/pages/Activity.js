@@ -90,6 +90,7 @@ const Activity = () => {
                     Date
                   </div>
                 </div>
+                <div className='Misy_activity'>
                 {
                   listActivity.length != 0 && listActivity.map((act,index)=>(
                     <div className='table_item_activity'>
@@ -114,6 +115,7 @@ const Activity = () => {
                     </div>
                   ))
                 }
+              </div>
               </div>
               )
             }

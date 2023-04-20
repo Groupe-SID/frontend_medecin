@@ -72,6 +72,7 @@
 
 .item_users{
     width:17%;
+    overflow: hidden;
 }
 
 .actions_icon{
@@ -92,6 +93,11 @@
     color: var(--bg-color);
     margin-left: 55px;
     cursor: pointer;
+}
+.action_delete:hover{
+    background-color: rgba(1, 131, 12, 0.6);
+    color: var(--bg-color);
+
 }
 .action_delete p{
     font-size: 12px;

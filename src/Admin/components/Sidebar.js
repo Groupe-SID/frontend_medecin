@@ -10,13 +10,13 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Sidebar = () => {
-  // const navigate = useNavigate();
-  // const logoutAdmin = () => {
-  //   if (window.confirm("Do you really want to leave?")) {
-  //     localStorage.clear();
-  //     navigate("/admin")
-  //   }
-  // }
+   const navigate = useNavigate();
+  const logoutAdmin = () => {
+    if (window.confirm("Do you really want to leave?")) {
+      localStorage.clear();
+      navigate("/admin")
+    }
+  }
   return (
     <div className='sidebar'>
         <div className='sidebar-logo'>
@@ -94,13 +94,9 @@ const Sidebar = () => {
               
             </ul>
         </div>
-        <div className='sidebar-footer'>
-            <a href="" className='menuLink' >
-                <FiLogOut className='icon'/>
-                <span className='menu-text'>
-                  Log out
-                </span>
-            </a>
+        <div className='sidebar-footer' onClick={logoutAdmin}>
+            <FiLogOut className='icon'/>
+            Log out
         </div>
     </div>
   )

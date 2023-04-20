@@ -131,13 +131,25 @@ const deleteUser = (id_user) =>{
                         {user.is_admin == true ? "Admin" : "user"}
                       </div>
                       <div className='item_users'>
-                        <div className='action_delete' onClick={()=>deleteUser(user.id)}>
-                          <p>Delete</p>
-                          <FiTrash
-                            className='actions_icon' 
-                            size={15} 
-                            color="#ffffff"/>
-                        </div>
+                        {
+                          user.is_admin && (
+                            <div>
+                              ADMIN
+                            </div>
+                          )
+                        }
+                        {
+                          !user.is_admin && (
+                            <div className='action_delete' onClick={()=>deleteUser(user.id)}>
+                              <p>Delete</p>
+                              <FiTrash
+                                className='actions_icon' 
+                                size={15} 
+                                color="#ffffff"/>
+                            </div>
+                          )
+                        }
+                        
                       </div>
                     </div>
                   ))

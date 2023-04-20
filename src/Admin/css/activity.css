@@ -62,7 +62,8 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    height: 70px;
+    /* height: 70px; */
+    min-height: 70px;
     background-color: rgb(253, 253, 253);
     box-shadow: 0 0 2px rgba(43, 42, 42, 0.6);
     margin-bottom: 15px;
@@ -72,6 +73,7 @@
 
 .item_activity{
     width:17%;
+
 }
 
 #description, #detail{
@@ -79,5 +81,12 @@
 }
 #table{
     margin-right: 15px;
+}
+
+.Misy_activity{
+    /* border:1px solid pink; */
+    padding: 2px;
+    max-height: 430px;
+    overflow-y: scroll;
 }
 
