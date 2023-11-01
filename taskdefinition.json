@@ -2,7 +2,7 @@
     "containerDefinitions": [
         {
             "name": "waiz-in-front-app-first-task",
-            "image": "649952013762.dkr.ecr.us-west-2.amazonaws.com/waiz_in_ecr_front_repo_app2023:latest",
+            "image": "<IMAGE_NAME>",
             "portMappings": [
                 {
                     "containerPort": 80,

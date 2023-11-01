@@ -28,10 +28,13 @@ phases:
       - printf '[{"name":”myimage","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
       - cat imageDetail.json
+      - printf '[{"name":"waiz-in-front-app-first-task","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json
 artifacts:
     files:
       - imagedefinitions.json
       - imageDetail.json
+      - imagedefinitions.json
       - appspec.yaml
       - taskdefinition.json
       
