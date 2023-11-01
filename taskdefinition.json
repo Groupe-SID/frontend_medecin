@@ -1,0 +1,44 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "waiz-in-front-app-first-task",
+            "image": "<IMAGE_NAME>",
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "cicd-logs",
+                    "awslogs-region": "us-west-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "family": "waiz-in-front-app-first-task",
+    "taskRoleArn": "arn:aws:iam::649952013762:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::649952013762:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "status": "ACTIVE",
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048",
+    "tags": [
+        {
+            "key": "Name",
+            "value": "GreenTaskDefinition"
+        }
+    ]
+}
