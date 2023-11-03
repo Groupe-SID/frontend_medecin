@@ -39,12 +39,12 @@ const Doctors = () => {
 
 
   const loadData = async() => {
-    const response = await axios.get("http://localhost:3001/api/medecins",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListDoc(response.data);
 
-    const response1 = await axios.get("http://localhost:3001/api/users/"+user_id,{headers:{
+    const response1 = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/"+user_id,{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setUserInfo(response1.data);
@@ -65,7 +65,7 @@ const Doctors = () => {
   const getUserById = () =>{
     try
     {
-      axios.get("http://localhost:3001/api/users/"+user_id,{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/"+user_id,{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -90,7 +90,7 @@ const Doctors = () => {
     console.log(accesToken)
     try
     {
-      axios.get("http://localhost:3001/api/medecins",{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -111,7 +111,7 @@ const Doctors = () => {
   const saveDoctor = () =>{
     try
     {
-      axios.post("http://localhost:3001/api/medecins",{
+      axios.post("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{
         num_medecin : rn,
         nom:nom,
         prenoms:prenoms,
@@ -144,7 +144,7 @@ const Doctors = () => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       try
       {
-        axios.delete("http://localhost:3001/api/medecins/"+id_doc,{
+        axios.delete("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins/"+id_doc,{
           headers :{
             'Authorization':'Bearer '+ accesToken
           }
@@ -179,7 +179,7 @@ const Doctors = () => {
   const editDoctor = () =>{
     try
     {
-      axios.put("http://localhost:3001/api/medecins/"+idModif,{
+      axios.put("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins/"+idModif,{
         num_medecin:num_medecin,
         nom:nom,
         prenoms:prenoms,

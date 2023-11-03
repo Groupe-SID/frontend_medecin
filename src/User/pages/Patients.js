@@ -60,16 +60,16 @@ const Patients = () => {
     };
 
   const loadData = async()=>{
-    const response = await axios.get("http://localhost:3001/api/patients",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListPatient(response.data);
-    const response1 = await axios.get("http://localhost:3001/api/medecins",{headers:{
+    const response1 = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListMed(response1.data);
     
-    const response2 = await axios.get("http://localhost:3001/api/users/"+user_id,{headers:{
+    const response2 = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/"+user_id,{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setUserInfo(response2.data);
@@ -94,7 +94,7 @@ const Patients = () => {
  const getUserById = () =>{
   try
   {
-    axios.get("http://localhost:3001/api/users/"+user_id,{
+    axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/"+user_id,{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }
@@ -120,7 +120,7 @@ const Patients = () => {
     console.log(accesToken)
     try
     {
-      axios.get("http://localhost:3001/api/patients",{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients",{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -142,7 +142,7 @@ const Patients = () => {
     console.log(accesToken)
     try
     {
-      axios.get("http://localhost:3001/api/medecins",{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -172,7 +172,7 @@ const Patients = () => {
   const savePatient = () =>{
     try
     {
-      axios.post("http://localhost:3001/api/patients",{
+      axios.post("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients",{
         nom:nom,
         prenoms:prenoms,
         genre:genre,
@@ -205,7 +205,7 @@ const Patients = () => {
     if (window.confirm("Are you sur you want to delete this item?")) {
       try
       {
-        axios.delete("http://localhost:3001/api/patients/"+id_doc,{
+        axios.delete("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients/"+id_doc,{
           headers :{
             'Authorization':'Bearer '+ accesToken
           }
@@ -258,7 +258,7 @@ const Patients = () => {
       console.log(prenoms)  
       console.log(genre)  
       console.log(adresse )      
-      axios.put("http://localhost:3001/api/patients/"+idModif,{
+      axios.put("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients/"+idModif,{
         nom:nom,
         prenoms:prenoms,
         // genre:genre,
@@ -291,7 +291,7 @@ const Patients = () => {
   const saveVisit = () =>{
     try
     {
-      axios.post("http://localhost:3001/api/traitements",{
+      axios.post("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/traitements",{
         patient_id:idModif,
         medecin_id:idDoc,
         datecons:date,

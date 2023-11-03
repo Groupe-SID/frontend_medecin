@@ -20,7 +20,7 @@ const TablePatient = () => {
     const [toggleDelete,setTdelete] = useState(false)
 
     const loadData = async()=>{
-        const response = await axios.get("http://localhost:3001/api/users",{headers:{
+        const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users",{headers:{
           'Authorization':'Bearer '+ accesToken
         }});
         setListUser(response.data);
@@ -35,7 +35,7 @@ const TablePatient = () => {
         console.log(accesToken)
         try
         {
-            axios.get("http://localhost:3001/api/users",{
+            axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users",{
                 headers :{
                     'Authorization':'Bearer '+ accesToken
                 }
@@ -83,21 +83,21 @@ const TablePatient = () => {
 
     const saveChangePrivilege = ()=>{
         try{
-            axios.post("http://localhost:3001/api/users/privilege",{
+            axios.post("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/privilege",{
                 username: usernameUser,
                 is_granted: toggleInsert,
                 privilege_on: "patients",
                 privilege_type: "INSERT"
             }).then(function (response) {
                 if(response.status === 200){
-                    axios.post("http://localhost:3001/api/users/privilege",{
+                    axios.post("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/privilege",{
                         username: usernameUser,
                         is_granted: toggleUpdate,
                         privilege_on: "patients",
                         privilege_type: "UPDATE"
                     }).then(function (response) {
                         if(response.status === 200){
-                            axios.post("http://localhost:3001/api/users/privilege",{
+                            axios.post("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/privilege",{
                                 username: usernameUser,
                                 is_granted: toggleDelete,
                                 privilege_on: "patients",

@@ -110,7 +110,7 @@ const validateLastForm = () => {
       return null;
   };
 
-  axios.post("http://localhost:3001/api/register",{
+  axios.post("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/register",{
     username: username,
     nom: nom,
     prenoms: prenoms,

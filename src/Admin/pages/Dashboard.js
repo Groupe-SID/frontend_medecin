@@ -23,26 +23,26 @@ const Dashboard = () => {
 
 
   const loadData = async()=>{
-    const response = await axios.get("http://localhost:3001/api/users",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListUser(response.data);
 
   }
   const loadDataMed = async()=>{
-    const response = await axios.get("http://localhost:3001/api/medecins",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListMed(response.data);
   }
   const loadDataPat = async()=>{
-    const response = await axios.get("http://localhost:3001/api/patients",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListPat(response.data);
   }
   const loadDataVis = async()=>{
-    const response = await axios.get("http://localhost:3001/api/traitements",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/traitements",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListVis(response.data);
@@ -64,7 +64,7 @@ const Dashboard = () => {
   console.log(accesToken)
   try
   {
-    axios.get("http://localhost:3001/api/users",{
+    axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users",{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }
@@ -86,7 +86,7 @@ const getAllMed = () => {
   console.log(accesToken)
   try
   {
-    axios.get("http://localhost:3001/api/medecins",{
+    axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }
@@ -108,7 +108,7 @@ const getAllPat = () => {
   console.log(accesToken)
   try
   {
-    axios.get("http://localhost:3001/api/patients",{
+    axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients",{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }
@@ -130,7 +130,7 @@ const getAllVis = () => {
   console.log(accesToken)
   try
   {
-    axios.get("http://localhost:3001/api/traitements",{
+    axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/traitements",{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }

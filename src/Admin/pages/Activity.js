@@ -23,7 +23,7 @@ const Activity = () => {
 
 
   const loadData = async()=>{
-    const response = await axios.get("http://localhost:3001/api/users_activities",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users_activities",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListActivity(response.data);
@@ -39,7 +39,7 @@ const Activity = () => {
   console.log(accesToken)
   try
   {
-    axios.get("http://localhost:3001/api/users_activities",{
+    axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users_activities",{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }

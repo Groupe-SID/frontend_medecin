@@ -42,12 +42,12 @@ const Visits = () => {
     };
 
   const loadData = async()=>{
-    const response = await axios.get("http://localhost:3001/api/traitements",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/traitements",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListVisit(response.data);
 
-    const response2 = await axios.get("http://localhost:3001/api/users/"+user_id,{headers:{
+    const response2 = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/"+user_id,{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setUserInfo(response2.data);
@@ -70,7 +70,7 @@ const Visits = () => {
     console.log(accesToken)
     try
     {
-      axios.get("http://localhost:3001/api/traitements",{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/traitements",{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -91,7 +91,7 @@ const Visits = () => {
   // const getMedecinById = (id) =>{
   //   try
   //   {
-  //     axios.get("http://localhost:3001/api/medecins/"+id,{
+  //     axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins/"+id,{
   //       headers :{
   //         'Authorization':'Bearer '+ accesToken
   //       }
@@ -111,7 +111,7 @@ const Visits = () => {
   // const getPatientById = (id) =>{
   //   try
   //   {
-  //     axios.get("http://localhost:3001/api/patients/"+id,{
+  //     axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients/"+id,{
   //       headers :{
   //         'Authorization':'Bearer '+ accesToken
   //       }
@@ -131,7 +131,7 @@ const Visits = () => {
   const getUserById = () =>{
     try
     {
-      axios.get("http://localhost:3001/api/users/"+user_id,{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/"+user_id,{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -156,7 +156,7 @@ const Visits = () => {
     console.log(accesToken)
     try
     {
-      axios.get("http://localhost:3001/api/medecins",{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/medecins",{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -186,7 +186,7 @@ const Visits = () => {
     if (window.confirm("Are you sure you want to delete this consultation?")) {
       try
       {
-        axios.delete("http://localhost:3001/api/traitements/"+id,{
+        axios.delete("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/traitements/"+id,{
           headers :{
             'Authorization':'Bearer '+ accesToken
           }
@@ -220,7 +220,7 @@ const Visits = () => {
 
     try
     {
-      axios.get("http://localhost:3001/api/patients/"+patient_id,{
+      axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/patients/"+patient_id,{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
@@ -244,7 +244,7 @@ const Visits = () => {
   const saveVisit = (id) =>{
     try
     {
-      axios.put("http://localhost:3001/api/traitements/"+id,{
+      axios.put("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/traitements/"+id,{
         patient_id:patient_id,
         medecin_id:id_doc,
         datecons:date,

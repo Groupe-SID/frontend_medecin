@@ -23,7 +23,7 @@ const Users = () => {
 
 
   const loadData = async()=>{
-    const response = await axios.get("http://localhost:3001/api/users",{headers:{
+    const response = await axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users",{headers:{
       'Authorization':'Bearer '+ accesToken
     }});
     setListUser(response.data);
@@ -39,7 +39,7 @@ const Users = () => {
   console.log(accesToken)
   try
   {
-    axios.get("http://localhost:3001/api/users",{
+    axios.get("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users",{
       headers :{
         'Authorization':'Bearer '+ accesToken
       }
@@ -61,7 +61,7 @@ const deleteUser = (id_user) =>{
   if (window.confirm("Are you sur you want to delete this item?")) {
     try
     {
-      axios.delete("http://localhost:3001/api/users/"+id_user,{
+      axios.delete("http://waiz-in-back-alb-124347689.us-west-2.elb.amazonaws.com:3000/api/users/"+id_user,{
         headers :{
           'Authorization':'Bearer '+ accesToken
         }
